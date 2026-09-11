@@ -1,0 +1,381 @@
+{% extends 'container.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+Прикольно
+{% endblock %}
+
+{% block description %}
+HELEN
+{% endblock %}
+
+{% block content %}
+<div class="container-1200">
+    <div class="breadcrumb">
+        <span class="breadcrumb__item">
+            Главная
+        </span>
+        <span class="breadcrumb__item">
+            Каталог
+        </span>
+        <span class="breadcrumb__item active">
+            Костюм женский
+        </span>
+    </div>
+    <div class="item">
+        <div class="item-photos">
+            <img class="item-photo" src="{% static 'item-image.jpg' %}">
+            <img class="item-photo" src="{% static 'item-image.jpg' %}">
+            <img class="item-photo" src="{% static 'item-image.jpg' %}">
+        </div>
+        <div class="item-body">
+            <div class="item-body__desktop_like">
+                <div class="like-button">
+                    <img src="{% static 'heart.svg' %}">
+                </div>
+            </div>
+            <div class="item-body__title">
+                <div class="h1">
+                    Костюм женский (Пиджак)
+                </div>
+            </div>
+            <div class="item-body__fields">
+                <div class="item-body__fields__left">
+                    <div class="item-body__fields__field">
+
+                        <span class="item-body__fields__key">
+                            Артикул:
+                        </span>
+                        <span class="item-body__fields__value">
+                            35258745
+                        </span>
+                    </div>
+                    <div class="item-body__fields__field">
+
+                        <span class="item-body__fields__key">
+                            Статус:
+                        </span>
+                        <span class="item-body__fields__value">
+                            В наличии
+                        </span>
+                    </div>
+                </div>
+                <div class="item-body__fields__right">
+                    <div class="item-body__fields__field item-body__fields__field--price">
+
+                        <span class="item-body__fields__key">
+                            Стоимость:
+                        </span>
+                        <span class="item-body__fields__value">
+                            13 499 ₽
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="item-body__choice_cards">
+                <div class="item-body__choice_cards_form">
+                    <div class="item-body__choice_cards__label">
+                        Размер:
+                    </div>
+                    <div class="choice-cards">
+                        <div class="choice-card">
+                            <div class="choice-card-title">
+                                XS
+                            </div>
+                            <div class="choice-card-subtitle">
+                                42
+                            </div>
+                        </div>
+                        <div class="choice-card active">
+                            <div class="choice-card-title">
+                                S
+                            </div>
+                            <div class="choice-card-subtitle">
+                                44
+                            </div>
+                        </div>
+                        <div class="choice-card">
+                            <div class="choice-card-title">
+                                M
+                            </div>
+                            <div class="choice-card-subtitle">
+                                46
+                            </div>
+                        </div>
+                        <div class="choice-card">
+                            <div class="choice-card-title">
+                                L
+                            </div>
+                            <div class="choice-card-subtitle">
+                                48
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-body__choice_cards_form">
+                    <div class="item-body__choice_cards__label">
+                        Размер:
+                    </div>
+                    <div class="choice-cards">
+                        <div class="choice-card color" style = "background:red">
+                        </div>
+                        <div class="choice-card active">
+                        </div>
+                        <div class="choice-card">
+                        </div>
+                        <div class="choice-card">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item-body__button">
+                <button class="button button--primary button--decor-line">
+
+                    <span class="button__line button__line--left"></span>
+
+                    <span class="button__text">
+                        Добавить в корзину
+                    </span>
+                    <span class="button__icon button__icon--right"> <img src="{% static 'shopping-cart.svg' %}" alt="">
+                    </span>
+
+
+                </button>
+
+            </div>
+            <div class="item-body__accordions">
+                <div class="accordion-container">
+                    <div class="accordion">
+                        <div class="accordion-title">
+                            Description
+                        </div>
+                        <div class="accordion-button">
+                            +
+                        </div>
+                    </div>
+                    <div class="accordion-panel">
+                        some text for the accordion panel
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="similar">
+        <div class="similar__title">
+            <div class="h1">
+                ПОХОЖЕЕ
+            </div>
+        </div>
+        <div class="similar__cards">
+            <div class="similar__cards__card">
+                <div class="similar__cards__card__img">
+                    <img src="{% static 'similar.png'%}">
+                </div>
+                <div class="similar__cards__card__title">
+                    Костюм женский (брюки + пиджак)
+                </div>
+                <div class="similar__cards__card__price">
+                    13 499 ₽
+                </div>
+                <div class="similar__cards__card__button">
+                    <button class="button button--small button--ghost button--decor-line button--flex ">
+
+                        <span class="button__line button__line--left"></span>
+
+                        <span class="button__text">
+                            Добавить в корзину
+                        </span>
+                        <span class="button__icon button__icon--right"> <img src="{% static 'shopping-cart2.svg' %}"
+                                alt="">
+                        </span>
+
+
+                    </button>
+
+                </div>
+
+            </div>
+            <div class="similar__cards__card">
+                <div class="similar__cards__card__img">
+                    <img src="{% static 'similar.png'%}">
+                </div>
+                <div class="similar__cards__card__title">
+                    Костюм женский (брюки + пиджак)
+                </div>
+                <div class="similar__cards__card__price">
+                    13 499 ₽
+                </div>
+                <div class="similar__cards__card__button">
+                    <button class="button button--small button--ghost button--decor-line button--flex ">
+
+                        <span class="button__line button__line--left"></span>
+
+                        <span class="button__text">
+                            Добавить в корзину
+                        </span>
+                        <span class="button__icon button__icon--right"> <img src="{% static 'shopping-cart2.svg' %}"
+                                alt="">
+                        </span>
+
+
+                    </button>
+
+                </div>
+
+            </div>
+            <div class="similar__cards__card">
+                <div class="similar__cards__card__img">
+                    <img src="{% static 'similar.png'%}">
+                </div>
+                <div class="similar__cards__card__title">
+                    Костюм женский (брюки + пиджак)
+                </div>
+                <div class="similar__cards__card__price">
+                    13 499 ₽
+                </div>
+                <div class="similar__cards__card__button">
+                    <button class="button button--small button--ghost button--decor-line button--flex ">
+
+                        <span class="button__line button__line--left"></span>
+
+                        <span class="button__text">
+                            Добавить в корзину
+                        </span>
+                        <span class="button__icon button__icon--right"> <img src="{% static 'shopping-cart2.svg' %}"
+                                alt="">
+                        </span>
+
+
+                    </button>
+
+                </div>
+
+            </div>
+            <div class="similar__cards__card">
+                <div class="similar__cards__card__img">
+                    <img src="{% static 'similar.png'%}">
+                </div>
+                <div class="similar__cards__card__title">
+                    Костюм женский (брюки + пиджак)
+                </div>
+                <div class="similar__cards__card__price">
+                    13 499 ₽
+                </div>
+                <div class="similar__cards__card__button">
+                    <button class="button button--small button--ghost button--decor-line button--flex ">
+
+                        <span class="button__line button__line--left"></span>
+
+                        <span class="button__text">
+                            Добавить в корзину
+                        </span>
+                        <span class="button__icon button__icon--right"> <img src="{% static 'shopping-cart2.svg' %}"
+                                alt="">
+                        </span>
+
+
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reviews">
+        <div class="reviews__title">
+            <div class="h1">
+                ОТЗЫВЫ
+            </div>
+        </div>
+        <div class="reviews__cards">
+            <div class="reviews__cards__card">
+                <div class="reviews__cards__card__top">
+                    <div class="reviews__cards__card__avatar">
+                        <img src="{% static 'woman.png' %}">
+                    </div>
+                    <div class="reviews__cards__card__user">
+                        <p>Наталья</p>
+                        <p>
+                            <img src="{% static 'star.svg' %}">
+                            <img src="{% static 'star.svg' %}">
+                            <img src="{% static 'star.svg' %}">
+                            <img src="{% static 'star.svg' %}">
+                            <img src="{% static 'star.svg' %}">
+
+                        </p>
+                    </div>
+                </div>
+                <div class="reviews__cards__card__bottom">
+                    <p>Прежде всего, укрепление и развитие внутренней структуры выявляет срочную потребность модели
+                        развития. Не следует, однако, забывать, что социально-экономическое развитие представляет
+                        собой
+                        интересный эксперимент проверки экономической целесообразности принимаемых решений. </p>
+                </div>
+
+
+            </div>
+            <div class="reviews__cards__card">
+                <div class="reviews__cards__card__top">
+                    <div class="reviews__cards__card__avatar">
+                        <img>
+                    </div>
+                    <div class="reviews__cards__card__user">
+                        <p>Наталья</p>
+                        5 stars
+                    </div>
+                </div>
+                <div class="reviews__cards__card__bottom">
+                    <p>Прежде всего, укрепление и развитие внутренней структуры выявляет срочную потребность модели
+                        развития. Не следует, однако, забывать, что социально-экономическое развитие представляет
+                        собой
+                        интересный эксперимент проверки экономической целесообразности принимаемых решений. </p>
+                </div>
+
+
+            </div>
+            <div class="reviews__cards__card">
+                <div class="reviews__cards__card__top">
+                    <div class="reviews__cards__card__avatar">
+                        <img>
+                    </div>
+                    <div class="reviews__cards__card__user">
+                        <p>Наталья</p>
+                        5 stars
+                    </div>
+                </div>
+                <div class="reviews__cards__card__bottom">
+                    <p>Прежде всего, укрепление и развитие внутренней структуры выявляет срочную потребность модели
+                        развития. Не следует, однако, забывать, что социально-экономическое развитие представляет
+                        собой
+                        интересный эксперимент проверки экономической целесообразности принимаемых решений. </p>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="reviews__button">
+            <button class="button button--ghost button--decor-line button--small">
+                <span class="button__line button__line--left"></span>
+
+                <span class="button__text">
+                    Показать еще
+                </span>
+                <span class="button__line button__line--right"></span>
+
+            </button>
+
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.accordion').forEach(accordion => {
+            accordion.addEventListener('click', () => {
+                accordion.parentElement.classList.toggle('active');
+                const button = accordion.querySelector('.accordion-button');
+                button.textContent = button.textContent.trim() === '+' ? '-' : '+';
+            });
+        });
+    </script>
+</div>
+{% endblock %}

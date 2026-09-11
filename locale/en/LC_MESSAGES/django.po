@@ -1,0 +1,84 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-20 22:37+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/templates/container.html:23 app/templates/container.html:102
+#: app/templates/container.html:153 app/templates/container.html:211
+msgid "Каталог"
+msgstr "Catalog"
+
+#: app/templates/container.html:24 app/templates/container.html:103
+msgid "Коллекции"
+msgstr "Collections"
+
+#: app/templates/container.html:25 app/templates/container.html:104
+msgid "О бренде"
+msgstr "About brand"
+
+#: app/templates/container.html:141
+msgid "Помощь"
+msgstr "Help"
+
+#: app/templates/container.html:145
+msgid "Клиентам"
+msgstr "Customers"
+
+#: app/templates/container.html:146
+msgid "Оплата"
+msgstr "Payment"
+
+#: app/templates/container.html:147
+msgid "Доставка"
+msgstr "Delivery"
+
+#: app/templates/container.html:151
+msgid "Навигация"
+msgstr "Navigation"
+
+#: app/templates/container.html:152
+msgid "Главная"
+msgstr "Home"
+
+#: app/templates/container.html:154
+msgid "Личный кабинет"
+msgstr "Account"
+
+#: app/templates/container.html:158
+msgid "Контакты"
+msgstr "Contacts"
+
+#: app/templates/container.html:216
+msgid "Поиск"
+msgstr "Search"
+
+#: app/templates/container.html:221
+msgid "Профиль"
+msgstr "Profile"
+
+#: app/templates/container.html:226
+msgid "Корзина"
+msgstr "Cart"
+
+#: app/templates/index.html:17
+msgid "ЗАКРЫТЫЙ КЛУБ HELEN"
+msgstr "HELEN PRIVATE CLUB"
+
+#: app/templates/index.html:20
+msgid "Получайте новости о новинках, закрытых коллекциях и привилегиях"
+msgstr "Receive updates on new arrivals, exclusive collections, and member-only privileges."

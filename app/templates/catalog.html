@@ -1,0 +1,389 @@
+{% extends 'container.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+Прикольно
+{% endblock %}
+
+{% block description %}
+HELEN
+{% endblock %}
+
+{% block content %}
+<div class="container-1200">
+    <div class="breadcrumb">
+        <span class="breadcrumb__item">
+            Главная
+        </span>
+        <span class="breadcrumb__item active">
+            Каталог
+        </span>
+
+    </div>
+    <div class="catalog__title">
+        <div class="h1">
+            Каталог
+        </div>
+        <div class="catalog__title__num">
+            256+ товаров
+        </div>
+    </div>
+
+    <div class="filters_desktop">
+        <div class="filters_desktop__left">
+            <div class="choice">
+                <button class="choice__button" type="button">
+                    <span class="choice__title">Размер</span>
+
+                </button>
+
+                <div class="choice__dropdown">
+                    <div class="choice__body">
+
+                        <label class="choice__option">
+                            <input type="radio" name="delivery" checked>
+                            <span>Standard delivery</span>
+                        </label>
+
+                        <label class="choice__option">
+                            <input type="radio" name="delivery">
+                            <span>Express delivery</span>
+                        </label>
+
+                        <label class="choice__option">
+                            <input type="radio" name="delivery">
+                            <span>Pickup</span>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="choice">
+                <button class="choice__button" type="button">
+                    <span class="choice__title">Цвет</span>
+
+                </button>
+
+                <div class="choice__dropdown">
+                    <div class="choice__body">
+
+                        <label class="choice__option">
+                            <input type="radio" name="delivery" checked>
+                            <span>Standard delivery</span>
+                        </label>
+
+                        <label class="choice__option">
+                            <input type="radio" name="delivery">
+                            <span>Express delivery</span>
+                        </label>
+
+                        <label class="choice__option">
+                            <input type="radio" name="delivery">
+                            <span>Pickup</span>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="choice">
+                <button class="choice__button" type="button">
+                    <span class="choice__title">Коллекция</span>
+
+                </button>
+
+                <div class="choice__dropdown">
+                    <div class="choice__body">
+                        <div class="checkbox-group">
+
+                            <label class="checkbox">
+
+                                <input type="checkbox">
+
+                                <span class="checkbox__mark">
+
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M5 12L10 17L19 8" stroke="white" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+
+                                </span>
+
+                                <span class="checkbox__text">
+                                    First option
+                                </span>
+
+                            </label>
+
+                            <label class="checkbox">
+
+                                <input type="checkbox">
+
+                                <span class="checkbox__mark">
+
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M5 12L10 17L19 8" stroke="white" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+
+                                </span>
+
+                                <span class="checkbox__text">
+                                    Second option
+                                </span>
+
+                            </label>
+
+                            <label class="checkbox">
+
+                                <input type="checkbox">
+
+                                <span class="checkbox__mark">
+
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M5 12L10 17L19 8" stroke="white" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+
+                                </span>
+
+                                <span class="checkbox__text">
+                                    Third option
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filters_desktop__right">
+            <div class="choice">
+                <button class="choice__button" type="button">
+                    <span class="choice__title">Сортировка</span>
+                    <span class="choice__icon">
+                        <img src="{% static 'sort.svg' %}">
+                    </span>
+                </button>
+
+                <div class="choice__dropdown">
+                    <div class="choice__body">
+
+                        <label class="choice__option">
+                            <input type="radio" name="delivery" checked>
+                            <span>Standard delivery</span>
+                        </label>
+
+                        <label class="choice__option">
+                            <input type="radio" name="delivery">
+                            <span>Express delivery</span>
+                        </label>
+
+                        <label class="choice__option">
+                            <input type="radio" name="delivery">
+                            <span>Pickup</span>
+                        </label>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="filters_mobile">
+        <div class="filters_mobile__top">
+            <div class="choice_mobile">
+                <button class="choice__button" type="button" onclick="openMobile(mobileSort);">
+                    <span class="choice__title">Сортировка</span>
+                    <span class="choice__icon">
+                        <img src="{% static 'sort.svg' %}">
+                    </span>
+                </button>
+
+            </div>
+
+        </div>
+        <div class="filters_mobile__bottom">
+            <div class="choice_mobile">
+                <button class="choice__button" type="button" onclick="openMobile(mobileSize);">
+                    <span class="choice__title">Размер</span>
+
+                </button>
+
+            </div>
+            <div class="choice_mobile">
+                <button class="choice__button" type="button" onclick="openMobile(mobileColor);">
+                    <span class="choice__title">Цвет</span>
+
+                </button>
+            </div>
+            <div class="choice_mobile">
+                <button class="choice__button" type="button" onclick="openMobile(mobileCollections);">
+                    <span class="choice__title">Коллекция</span>
+
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="catalog-items">
+        <div class="catalog-item">
+            <div class="catalog-item__photo">
+                <img src="{% static 'item-image.jpg' %}">
+            </div>
+            <div class="catalog-item__text">
+                <div class="catalog-item__title">
+                    Костюм-пиджак женский
+                </div>
+                <div class="catalog-item__price">
+                    13 499 ₽
+                </div>
+            </div>
+            <div class="catalog-item__mobile-button">
+                    <button class="button button--small button--ghost button--decor-line button--flex ">
+
+                        <span class="button__line button__line--left"></span>
+
+                        <span class="button__text">
+                            Добавить в корзину
+                        </span>
+                        <span class="button__icon button__icon--right"> <img width="24" height="24" src="{% static 'shopping-cart2.svg' %}"
+                                alt="">
+                        </span>
+
+
+                    </button>
+
+            </div>
+        </div>
+        <div class="catalog-item">
+            <div class="catalog-item__photo">
+                <img src="{% static 'item-image.jpg' %}">
+            </div>
+            <div class="catalog-item__text">
+                <div class="catalog-item__title">
+                    Костюм-пиджак женский
+                </div>
+                <div class="catalog-item__price">
+                    13 499 ₽
+                </div>
+            </div>
+        </div>
+        <div class="catalog-item">
+            <div class="catalog-item__photo">
+                <img src="{% static 'item-image.jpg' %}">
+            </div>
+            <div class="catalog-item__text">
+                <div class="catalog-item__title">
+                    Костюм-пиджак женский
+                </div>
+                <div class="catalog-item__price">
+                    13 499 ₽
+                </div>
+            </div>
+        </div>
+        <div class="catalog-item">
+            <div class="catalog-item__photo">
+                <img src="{% static 'item-image.jpg' %}">
+            </div>
+            <div class="catalog-item__text">
+                <div class="catalog-item__title">
+                    Костюм-пиджак женский
+                </div>
+                <div class="catalog-item__price">
+                    13 499 ₽
+                </div>
+            </div>
+        </div>
+        <div class="catalog-item">
+            <div class="catalog-item__photo">
+                <img src="{% static 'item-image.jpg' %}">
+            </div>
+            <div class="catalog-item__text">
+                <div class="catalog-item__title">
+                    Костюм-пиджак женский
+                </div>
+                <div class="catalog-item__price">
+                    13 499 ₽
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pagination-container">
+        <div class="pagination">
+            <a href='#'>
+                <div class="pagionation-item active ">
+                    01
+                </div>
+            </a>
+            <a href='#'>
+                <div class="pagionation-item ">
+                    02
+                </div>
+            </a>
+            <a href='#'>
+
+                <div class="pagionation-item">
+                    03
+                </div>
+
+            </a>
+            <a href='#'>
+
+                <div class="pagionation-item">
+                    ...
+                </div>
+
+            </a>
+            <a href='#'>
+                <div class="pagionation-item ">
+                    20
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="closed_club">
+        <div class='closed_club__title  {% if request.current_language == "ko" %} kor
+                        {% endif %} '>
+            {% trans "ЗАКРЫТЫЙ КЛУБ HELEN" %}
+        </div>
+        <div class="closed_club__subtitle">
+            {% trans "Получайте новости о новинках, закрытых коллекциях и привилегиях" %}
+        </div>
+        <div class="input input--action input--large closed_club__input">
+
+
+            <div class="input__wrapper">
+
+                <input type="text" class="input__field" placeholder="ВАШ E-MAIL">
+
+                <img src="{% static 'subtract.svg' %}" class="input__button2">
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class = "mobile_sort">
+
+</div>
+<div class = "mobile_color">
+
+</div>
+<div class = "mobile_collections">
+
+</div>
+<div class = "mobile_size">
+
+</div>
+{% endblock %}

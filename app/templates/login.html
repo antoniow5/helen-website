@@ -1,0 +1,77 @@
+{% extends 'container.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+Прикольно
+{% endblock %}
+
+{% block description %}
+HELEN
+{% endblock %}
+
+{% block content %}
+<div class="container-1200">
+    <div class="breadcrumb">
+        <span class="breadcrumb__item">
+            Главная
+        </span>
+        <span class="breadcrumb__item active">
+            Вход
+        </span>
+    </div>
+    <div class="login-container">
+        <div class="h1">Вход</div>
+        <form method="post" action="{% url 'authentication' %}">
+
+            <div class="login-form">
+                {% csrf_token %}
+                <div class="input">
+                    <label class="input__label" for="username">Email</label>
+                    <div class="input__wrapper">
+                        <input type="text" id="username" name="username" class="input__field"
+                            placeholder="Введите текст" required>
+                    </div>
+                </div>
+
+                <div class="input input--password">
+                    <label class="input__label" for="password">Пароль</label>
+                    <div class="input__wrapper">
+                        <input type="password" id="password" name="password" class="input__field"
+                            placeholder="Введите пароль" required>
+                        <button type="button" class="input__visibility">
+                            <img src="{% static 'eye.svg' %}" alt="Toggle visibility">
+                        </button>
+                    </div>
+                </div>
+
+                {% if error %}
+                <div class="error-message">{{ error }}</div>
+                {% endif %}
+
+                <button class="button button--primary button--line">
+                    Войти
+                </button>
+
+            </div>
+        </form>
+
+    </div>
+</div>
+<script>
+    const button = document.querySelector('.input__visibility');
+    const password = document.querySelector('#password');
+
+    button.addEventListener('mousedown', function () {
+        password.type = 'text';
+    });
+
+    button.addEventListener('mouseup', function () {
+        password.type = 'password';
+    });
+
+    button.addEventListener('mouseleave', function () {
+        password.type = 'password';
+    });
+</script>
+
+{% endblock %}

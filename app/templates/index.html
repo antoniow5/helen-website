@@ -1,0 +1,88 @@
+{% extends 'container.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+Прикольно
+{% endblock %}
+
+{% block description %}
+HELEN
+{% endblock %}
+
+{% block content %}
+<div class="index-image">
+    <img src="{% static 'main.png'%}" width="100%">
+
+</div>
+
+<div class="container-1200">
+    <div class="index-banner">
+        <div class="index-banner__title">
+            Новая коллекция
+        </div>
+        <div class="index-banner__subtitle">
+            Премиальная одежда и белье <br>для женщин
+        </div>
+        <div class="index-banner__button">
+            <button class="button button--ghost button--decor-line">
+                <span class="button__line button__line--left"></span>
+
+                <span class="button__text">
+                    Смотреть коллекцию
+                </span>
+                <span class="button__icon button__icon--right"> <img src="{% static 'shopping-cart2.svg' %}" alt="">
+                </span>
+
+            </button>
+
+        </div>
+    </div>
+    <div class = "index-grid">
+        <div class = "index-grid-left index-grid-item">
+            <img src = "{% static 'index-grid1.png' %}">
+            <div class = "index-grid-item__title">
+                Одежда
+            </div>
+        </div>
+        <div class = "index-grid-item">
+            <img src = "{% static 'index-grid2.png' %}">
+            <div class = "index-grid-item__title">
+                Нижнее белье
+            </div>
+
+        </div>
+        <div class = "index-grid-item">
+            <img src = "{% static 'index-grid3.png' %}">
+            <div class = "index-grid-item__title">
+                Новинки
+            </div>
+
+        </div>
+    </div>
+    <div class="closed_club" style = "margin-top: 56px;">
+        <div class='closed_club__title  {% if request.current_language == "ko" %} kor
+                        {% endif %} '>
+            {% trans "ЗАКРЫТЫЙ КЛУБ HELEN" %}
+        </div>
+        <div class="closed_club__subtitle">
+            {% trans "Получайте новости о новинках, закрытых коллекциях и привилегиях" %}
+        </div>
+        <div class="input input--action input--large closed_club__input">
+
+
+            <div class="input__wrapper">
+
+                <input type="text" class="input__field" placeholder="ВАШ E-MAIL">
+
+                <img src="{% static 'subtract.svg' %}" class="input__button2">
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+{% endblock %}

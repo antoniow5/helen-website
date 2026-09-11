@@ -1,0 +1,455 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+HELEN
+{% endblock %}
+
+{% block description %}
+HELEN
+{% endblock %}
+
+{% block container %}
+{{ request.user }}
+<!-- <div class="overlay" id="overlay"></div> -->
+ <script>
+function showMessage(text, duration = 4000) {
+    const container = document.querySelector(".messages-container");
+
+    const message = document.createElement("div");
+    message.className = "message";
+
+    const content = document.createElement("div");
+    content.className = "message-content";
+    content.textContent = text;
+
+    const closeButton = document.createElement("button");
+    closeButton.className = "message-close";
+    closeButton.type = "button";
+    closeButton.innerHTML = "&times;";
+
+    closeButton.addEventListener("click", () => {
+        removeMessage(message);
+    });
+
+    message.appendChild(content);
+    message.appendChild(closeButton);
+    container.appendChild(message);
+
+    setTimeout(() => {
+        removeMessage(message);
+    }, duration);
+}
+
+function removeMessage(message) {
+    if (message.classList.contains("removing")) {
+        return;
+    }
+
+    message.classList.add("removing");
+
+    setTimeout(() => {
+        message.remove();
+    }, 200);
+}
+ </script>
+ <div class = "messages-container"></div>
+
+<div class="menu_desktop">
+    <div class="container-1200">
+        <nav class="menu_desktop__container">
+            <div class="menu_desktop__left">
+                <a class="menu_desktop__logo" href="/">HELEN</a>
+            </div>
+
+            <div class="menu_desktop__center">
+                <a class="menu_desktop__link" href="/catalog">{% trans "Каталог" %}</a>
+                <a class="menu_desktop__link" href="#">{% trans "Коллекции" %}</a>
+                <a class="menu_desktop__link" href="#">{% trans "О бренде" %}</a>
+
+            </div>
+
+            <div class="menu_desktop__right">
+                <div class="menu_desktop__buttons">
+
+                    <div class="menu_desktop__search">
+                        <input class="menu_desktop__search_input" type="text" placeholder="Поиск...">
+
+                        <button class="menu_desktop__search_button menu_desktop__icon">
+                            <img src="{% static 'search.svg' %}" width="24" alt="">
+                        </button>
+                    </div>
+
+                    <div class="menu_desktop__link" href="#">
+                        <a href="/catalog">
+                            <img class="menu_desktop__icon" src="{% static 'user.svg'%}" width="24">
+                        </a>
+                    </div>
+
+                    <div class="menu_desktop__link menu_desktop__cart" href="#">
+                        <a href="/cart">
+                            <img class="menu_desktop__icon" src="{% static 'shopping-cart.svg' %}" width="24">
+                        </a>
+                        <span class="menu_desktop__cart_badge">
+                            3
+                        </span>
+                    </div>
+                </div>
+                <div class="menu_desktop__language">
+                    <button class="menu_desktop__language_button">
+                        {{ request.current_language|upper }}
+                        <img class="menu_desktop__language_arrow reversed_up" src="{% static 'arrow-up.svg' %}">
+
+                        {% if request.current_language == "ru" %}
+                        <img src="{% static 'flag-rus.png' %}">
+                        {% elif request.current_language == "en" %}
+                        <img src="{% static 'flag-eng.png' %}">
+                        {% elif request.current_language == "ko" %}
+                        <img src="{% static 'flag-kor.png' %}">
+                        {% endif %}
+                    </button>
+
+                    <div class="menu_desktop__language_menu">
+                        <a href="?lang=ru">
+                            RU
+                            <img src="{% static 'flag-rus.png' %}" width="20">
+                        </a>
+
+                        <a href="?lang=en">
+                            EN
+                            <img src="{% static 'flag-eng.png' %}" width="20">
+                        </a>
+
+                        <a href="?lang=ko">
+                            KR
+                            <img src="{% static 'flag-kor.png' %}" width="20">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="menu_mobile">
+    <div class="container-mobile">
+        <nav class="menu_mobile__container">
+            <div class="menu_mobile__left">
+                <div class="menu_mobile__logo">
+                    HELEN
+                </div>
+            </div>
+            <div class="menu_mobile__right">
+                <button class="menu_mobile__hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+</div>
+<div class="menu_mobile__drawer">
+    <a href="#">{% trans "Каталог" %}</a>
+    <a href="#">{% trans "Коллекции" %}</a>
+    <a href="#">{% trans "О бренде" %}</a>
+    <div class="menu_desktop__language">
+        <button class="menu_desktop__language_button" onclick="openLanguage()">
+            {{ request.current_language|upper }}
+
+            <img class="menu_desktop__language_arrow" src="{% static 'arrow-up.svg' %}">
+            {% if request.current_language == "ru" %}
+            <img src="{% static 'flag-rus.png' %}">
+            {% elif request.current_language == "en" %}
+            <img src="{% static 'flag-eng.png' %}">
+            {% elif request.current_language == "ko" %}
+            <img src="{% static 'flag-kor.png' %}">
+            {% endif %}
+        </button>
+
+    </div>
+</div>
+
+{% block content %}
+{% endblock %}
+<div class="footer_desktop">
+    <div class="container-1200">
+        <nav class="footer_desktop__container">
+            <div class="footer_desktop__menu">
+                <div class="footer_desktop__menu_column">
+                    <a class="footer_desktop__menu_logo" href="#">HELEN</a>
+                </div>
+                <div class="footer_desktop__menu_column">
+                    <h3 class="footer_desktop__menu_title">{% trans "Помощь" %}</h3>
+                </div>
+
+                <div class="footer_desktop__menu_column">
+                    <h3 class="footer_desktop__menu_title">{% trans "Клиентам" %}</h3>
+                    <a class="footer_desktop__menu_link" href="#">{% trans "Оплата" %}</a>
+                    <a class="footer_desktop__menu_link" href="#">{% trans "Доставка" %}</a>
+                </div>
+
+                <div class="footer_desktop__menu_column">
+                    <h3 class="footer_desktop__menu_title">{% trans "Навигация" %}</h3>
+                    <a class="footer_desktop__menu_link" href="#">{% trans "Главная" %}</a>
+                    <a class="footer_desktop__menu_link" href="#">{% trans "Каталог" %}</a>
+                    <a class="footer_desktop__menu_link" href="#">{% trans "Личный кабинет" %}</a>
+                </div>
+
+                <div class="footer_desktop__menu_column">
+                    <h3 class="footer_desktop__menu_title">{% trans "Контакты" %}</h3>
+                    <a class="footer_desktop__menu_link" href="#">hellen@mail.ru</a>
+                    <a class="footer_desktop__menu_link bold-text" href="#">8 800 123 56 67</a>
+                    <a class="footer_desktop__menu_link bold-text" href="#">
+                        <img src="{% static 'insta.svg' %}"
+                            style="border-right: 1px solid #fff; padding-right: 10px; margin-right: 5px;">
+                        <img src="{% static 'telegram.svg' %}">
+
+                    </a>
+
+                </div>
+
+
+                <!-- Repeat for remaining columns -->
+            </div>
+            <div class="footer_desktop__bottom">
+                <div class="footer_desktop__bottom_left">
+                    <img src="{% static 'visa-logo.svg' %}">
+                    <img src="{% static 'mir-logo.svg' %}">
+                    <img src="{% static 'master-logo.svg' %}">
+                    <img src="{% static 'paypal-logo.svg' %}">
+                </div>
+                <div class="footer_desktop__bottom_right">
+                    <button class="menu_desktop__language_button">
+                        {{ request.current_language|upper }}
+                        <img class="menu_desktop__language_arrow" src="{% static 'arrow-up.svg' %}">
+
+                        {% if request.current_language == "ru" %}
+                        <img src="{% static 'flag-rus.png' %}">
+                        {% elif request.current_language == "en" %}
+                        <img src="{% static 'flag-eng.png' %}">
+                        {% elif request.current_language == "ko" %}
+                        <img src="{% static 'flag-kor.png' %}">
+                        {% endif %}
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="footer_mobile">
+
+</div>
+<div class="bottom_menu_mobile">
+    <nav class="bottom_menu_mobile__container">
+        <a href="/catalog" class="bottom_menu_mobile__item">
+            <img src="{% static 'grid2.svg' %}" alt="">
+            <span>{% trans "Каталог" %}</span>
+        </a>
+
+        <a href="#" class="bottom_menu_mobile__item" onclick="openSearch()">
+            <img src="{% static 'search2.svg' %}" alt="">
+            <span>{% trans "Поиск" %}</span>
+        </a>
+
+        <a href="#" class="bottom_menu_mobile__item">
+            <img src="{% static 'user2.svg' %}" alt="">
+            <span>{% trans "Профиль" %}</span>
+        </a>
+
+        <a href="#" class="bottom_menu_mobile__item">
+            <img src="{% static 'shopping-cart2.svg' %}" alt="">
+            <span>{% trans "Корзина" %}</span>
+        </a>
+    </nav>
+</div>
+<div class="mobile_overlay"></div>
+
+<div class="mobile_language">
+    <!-- <div class="mobile_language__handle"></div> -->
+
+    <div class="mobile_language__buttons">
+        <a class="mobile_language__button" href="?lang=ru">
+            <img src="{% static 'flag-rus.png' %}">
+            Русский
+        </a>
+
+        <a class="mobile_language__button" href="?lang=en">
+            <img src="{% static 'flag-eng.png' %}">
+            English
+        </a>
+
+        <a class="mobile_language__button" href="?lang=ko">
+            <img src="{% static 'flag-kor.png' %}">
+            한국어
+        </a>
+    </div>
+</div>
+<div class="mobile_search">
+    <!-- <div class="mobile_language__handle"></div> -->
+    <p> search</p>
+    <p> input... </p>
+</div>
+<script>
+    const search = document.querySelector(".menu_desktop__search");
+    const button = search.querySelector(".menu_desktop__search_button");
+    const input = search.querySelector(".menu_desktop__search_input");
+
+    let buttonClicked = true;
+
+    button.addEventListener("mousedown", () => {
+        buttonClicked = true;
+    });
+    button.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        console.log(search.classList.value);
+
+        if (search.classList.contains("active")) {
+            console.log("remove");
+            search.classList.remove("active");
+        } else {
+            console.log("add");
+            search.classList.add("active");
+            input.focus();
+        }
+    });
+
+    input.addEventListener("blur", () => {
+        if (buttonClicked) {
+            search.classList.remove("active");
+        }
+
+        buttonClicked = false;
+    });
+
+
+    const language = document.querySelector('.menu_desktop__language');
+    const button2 = language.querySelector('.menu_desktop__language_button');
+
+    button2.addEventListener('click', (e) => {
+        e.stopPropagation();
+        language.classList.toggle('open');
+    });
+
+    document.addEventListener('click', () => {
+        language.classList.remove('open');
+    });
+
+    const menu = document.querySelector(".menu_mobile");
+    const drawer = document.querySelector(".menu_mobile__drawer");
+
+    const hamburger = document.querySelector(".menu_mobile__hamburger");
+
+    hamburger.addEventListener("click", () => {
+        menu.classList.toggle("open");
+        drawer.classList.toggle("open");
+    });
+
+    const mobileOverlay = document.querySelector(".mobile_overlay");
+
+
+    const mobileLanguage = document.querySelector(".mobile_language");
+
+    function openLanguage() {
+        mobileLanguage.classList.add("open");
+        mobileOverlay.classList.add("open");
+
+        document.body.style.overflow = "hidden";
+        mobileOverlay.addEventListener("click", closeLanguage);
+
+    }
+
+
+    function closeLanguage() {
+        mobileLanguage.classList.remove("open");
+        mobileOverlay.classList.remove("open");
+
+        document.body.style.overflow = "";
+        mobileOverlay.removeEventListener("click", closeLanguage);
+
+    }
+
+    const mobileSearch = document.querySelector(".mobile_search");
+
+    function openSearch() {
+        mobileSearch.classList.add("open");
+        mobileOverlay.classList.add("open");
+
+        document.body.style.overflow = "hidden";
+        mobileOverlay.addEventListener("click", closeSearch);
+
+    }
+
+
+    function closeSearch() {
+        mobileSearch.classList.remove("open");
+        mobileOverlay.classList.remove("open");
+
+        document.body.style.overflow = "";
+        mobileOverlay.removeEventListener("click", closeSearch);
+
+    }
+
+document.querySelectorAll(".choice").forEach(choice => {
+
+    const button = choice.querySelector(".choice__button");
+
+    button.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        document.querySelectorAll(".choice").forEach(item => {
+            if (item !== choice) {
+                item.classList.remove("choice--opened");
+            }
+        });
+
+        choice.classList.toggle("choice--opened");
+    });
+
+});
+
+document.addEventListener("click", () => {
+    document.querySelectorAll(".choice").forEach(choice => {
+        choice.classList.remove("choice--opened");
+    });
+});
+
+const mobileSort = document.querySelector(".mobile_sort");
+const mobileColor = document.querySelector(".mobile_color");
+const mobileCollections = document.querySelector(".mobile_collections");
+const mobileSize = document.querySelector(".mobile_size");
+
+let openedPanel = null;
+
+function openMobile(panel) {
+    if (openedPanel) {
+        openedPanel.classList.remove("open");
+    }
+
+    openedPanel = panel;
+
+    panel.classList.add("open");
+    mobileOverlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+
+    mobileOverlay.addEventListener("click", closeMobile);
+}
+
+function closeMobile() {
+    if (openedPanel) {
+        openedPanel.classList.remove("open");
+        openedPanel = null;
+    }
+
+    mobileOverlay.classList.remove("open");
+    document.body.style.overflow = "";
+
+    mobileOverlay.removeEventListener("click", closeMobile);
+}
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,517 @@
+{% extends 'container.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+Прикольно
+{% endblock %}
+
+{% block description %}
+HELEN
+{% endblock %}
+
+{% block content %}
+    <div style = "display: absolute;top:0;">
+        <img src = "{% static 'main.png'%}" width = "100%">
+        
+    </div>
+
+<div class="container-1200">
+    <div class="closed_club">
+        <div class='closed_club__title  {% if request.current_language == "ko" %} kor
+                        {% endif %} '>
+            {% trans "ЗАКРЫТЫЙ КЛУБ HELEN" %}
+        </div>
+        <div class="closed_club__subtitle">
+            {% trans "Получайте новости о новинках, закрытых коллекциях и привилегиях" %}
+        </div>
+        <div class="input input--action input--large closed_club__input">
+
+
+            <div class="input__wrapper">
+
+                <input type="text" class="input__field" placeholder="ВАШ E-MAIL">
+
+                <img src="{% static 'subtract.svg' %}" class="input__button2">
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <p> Some content... </p>
+
+    <div class="reviews">
+        <div class="reviews__title">
+            <div class="h1">
+                ОТЗЫВЫ
+            </div>
+        </div>
+        <div class="reviews__cards">
+            <div class="reviews__cards__card">
+                <div class="reviews__cards__card__top">
+                    <div class="reviews__cards__card__avatar">
+                        <img>
+                    </div>
+                    <div class="reviews__cards__card__user">
+                        <p>Наталья</p>
+                        5 stars
+                    </div>
+                </div>
+                <div class="reviews__cards__card__bottom">
+                    <p>Прежде всего, укрепление и развитие внутренней структуры выявляет срочную потребность модели
+                        развития. Не следует, однако, забывать, что социально-экономическое развитие представляет собой
+                        интересный эксперимент проверки экономической целесообразности принимаемых решений. </p>
+                </div>
+
+
+            </div>
+            <div class="reviews__cards__card">
+                <div class="reviews__cards__card__top">
+                    <div class="reviews__cards__card__avatar">
+                        <img>
+                    </div>
+                    <div class="reviews__cards__card__user">
+                        <p>Наталья</p>
+                        5 stars
+                    </div>
+                </div>
+                <div class="reviews__cards__card__bottom">
+                    <p>Прежде всего, укрепление и развитие внутренней структуры выявляет срочную потребность модели
+                        развития. Не следует, однако, забывать, что социально-экономическое развитие представляет собой
+                        интересный эксперимент проверки экономической целесообразности принимаемых решений. </p>
+                </div>
+
+
+            </div>
+            <div class="reviews__cards__card">
+                <div class="reviews__cards__card__top">
+                    <div class="reviews__cards__card__avatar">
+                        <img>
+                    </div>
+                    <div class="reviews__cards__card__user">
+                        <p>Наталья</p>
+                        5 stars
+                    </div>
+                </div>
+                <div class="reviews__cards__card__bottom">
+                    <p>Прежде всего, укрепление и развитие внутренней структуры выявляет срочную потребность модели
+                        развития. Не следует, однако, забывать, что социально-экономическое развитие представляет собой
+                        интересный эксперимент проверки экономической целесообразности принимаемых решений. </p>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="reviews__button">
+            <button class="button button--ghost button--decor-line button--small">
+                <span class="button__line button__line--left"></span>
+
+                <span class="button__text">
+                    Показать еще
+                </span>
+                <span class="button__line button__line--right"></span>
+
+            </button>
+
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- BUTTONS -->
+    <!-- ===================================================== -->
+
+    <h1>Buttons</h1>
+    <button class="button button--primary button--decor-line">
+
+        <span class="button__line button__line--left"></span>
+
+        <span class="button__text">
+            Войти
+        </span>
+
+        <span class="button__line button__line--right"></span>
+
+    </button>
+
+    <button class="button button--primary button--decor-line">
+
+        <span class="button__line button__line--left"></span>
+
+        <span class="button__text">
+            Оформить заказ
+        </span>
+
+
+    </button>
+
+    </button>
+
+    <button class="button button--primary button--decor-line">
+
+        <span class="button__line button__line--left"></span>
+
+        <span class="button__text">
+            Оформить заказ
+        </span>
+        <span class="button__icon button__icon--right"> <img src="{% static 'shopping-cart.svg' %}" alt="">
+        </span>
+
+
+    </button>
+    <button class="button button--primary button--line">
+        Primary Button
+    </button>
+
+    <button class="button button--secondary">
+        Secondary Button
+    </button>
+
+    <button class="button button--danger">
+        <span class="button__line button__line--left"></span>
+
+        <span class="button__text">
+            Оформить заказ
+        </span>
+    </button>
+
+    <button class="button button--ghost button--decor-line">
+
+        <span class="button__text">
+            Оформить заказ
+        </span>
+        <span class="button__line button__line--right"></span>
+
+    </button>
+
+    <br><br>
+
+    <button class="button button--primary button--small">
+        Small Button
+    </button>
+
+    <button class="button button--primary button--medium">
+        Medium Button
+    </button>
+
+    <button class="button button--primary button--large">
+        Large Button
+    </button>
+
+    <br><br>
+
+    <button class="button button--primary button--disabled" disabled>
+        Disabled Button
+    </button>
+
+    <button class="button button--primary button--loading">
+        Loading...
+    </button>
+
+
+    <hr>
+
+
+    <!-- ===================================================== -->
+    <!-- INPUT DEFAULT -->
+    <!-- ===================================================== -->
+
+    <h1>Inputs</h1>
+
+    <div class="input">
+
+        <label class="input__label">
+            Default Input
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="text" class="input__field" placeholder="Введите текст">
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ===================================================== -->
+    <!-- INPUT ACTIVE -->
+    <!-- ===================================================== -->
+
+    <div class="input input--active">
+
+        <label class="input__label">
+            Active Input
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="text" class="input__field" placeholder="Активный инпут">
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ===================================================== -->
+    <!-- INPUT FILLED -->
+    <!-- ===================================================== -->
+
+    <div class="input input--filled">
+
+        <label class="input__label">
+            Filled Input
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="text" class="input__field" value="Some text">
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ===================================================== -->
+    <!-- PASSWORD INPUT -->
+    <!-- ===================================================== -->
+
+    <div class="input input--password">
+
+        <label class="input__label">
+            Password
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="password" class="input__field" placeholder="Введите пароль">
+
+            <button class="input__visibility">
+
+                <img src="{% static " pencil.svg" %}">
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ===================================================== -->
+    <!-- INPUT ERROR -->
+    <!-- ===================================================== -->
+
+    <div class="input input--error">
+
+        <label class="input__label">
+            Password
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="password" class="input__field" placeholder="Введите пароль">
+
+        </div>
+
+        <span class="input__message">
+            Пароль должен содержать минимум 8 символов.
+        </span>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ===================================================== -->
+    <!-- INPUT SUCCESS -->
+    <!-- ===================================================== -->
+
+    <div class="input input--success">
+
+        <label class="input__label">
+            Password
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="password" class="input__field" value="CorrectPassword123">
+
+        </div>
+
+        <span class="input__message">
+            Отлично! Пароль подходит.
+        </span>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ===================================================== -->
+    <!-- INPUT DISABLED -->
+    <!-- ===================================================== -->
+
+    <div class="input input--disabled">
+
+        <label class="input__label">
+            Disabled Input
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="text" class="input__field" placeholder="Disabled" disabled>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ===================================================== -->
+    <!-- INPUT WITH ICON -->
+    <!-- ===================================================== -->
+
+    <div class="input input--icon">
+
+        <label class="input__label">
+            Search
+        </label>
+
+        <div class="input__wrapper">
+
+            <span class="input__icon">
+                🔍
+            </span>
+
+            <input type="search" class="input__field" placeholder="Поиск...">
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ===================================================== -->
+    <!-- INPUT WITH ACTION BUTTON -->
+    <!-- ===================================================== -->
+
+    <div class="input input--action">
+
+        <label class="input__label">
+            Send Code
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="text" class="input__field" placeholder="Введите код">
+
+            <button class="input__button">
+                →
+            </button>
+
+        </div>
+
+    </div>
+    <div class="input input--action">
+
+        <label class="input__label">
+            Send Code
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="text" class="input__field" placeholder="Введите код">
+
+            <img src="{% static 'subtract.svg' %}" class="input__button2">
+
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ===================================================== -->
+    <!-- SMALL INPUT -->
+    <!-- ===================================================== -->
+
+    <div class="input input--small">
+
+        <label class="input__label">
+            Small Input
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="text" class="input__field" placeholder="Small">
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ===================================================== -->
+    <!-- MEDIUM INPUT -->
+    <!-- ===================================================== -->
+
+    <div class="input input--medium">
+
+        <label class="input__label">
+            Medium Input
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="text" class="input__field" placeholder="Medium">
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ===================================================== -->
+    <!-- LARGE INPUT -->
+    <!-- ===================================================== -->
+
+    <div class="input input--large">
+
+        <label class="input__label">
+            Large Input
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="text" class="input__field" placeholder="Large">
+
+        </div>
+
+    </div>
+
+    <!-- <p>Inceptos at aliquet quis, morbi odio eget bibendum lorem. Purus dictumst, netus a vitae. Per metus vitae senectus, turpis fames commodo accumsan vel. Fusce bibendum aenean, nam lectus, per fermentum congue dictumst metus. Odio aenean venenatis, cras libero, hac ligula nisi imperdiet primis.</p><p>Ultrices pretium consectetur, senectus iaculis, magna felis cursus fames etiam egestas. Porttitor ultricies, nisl semper etiam. Metus mi libero pharetra, etiam aliquam integer, consequat tristique interdum cubilia augue eget. Aenean aliquet sit, conubia tempus euismod justo. Tempor blandit posuere euismod, per sem auctor, nisl risus et eleifend quisque nullam. Egestas erat, risus suscipit a nisl. Eu adipiscing, donec dapibus justo.</p><p>Lobortis dui, senectus etiam elementum gravida. Torquent metus at congue, mi massa curabitur, proin senectus id venenatis ut cras lacus. Aenean cras magna, eros porta duis quam non. Sodales blandit, ipsum nostra commodo. Bibendum duis, porta orci dictum. Fringilla feugiat iaculis, arcu convallis, vitae aptent malesuada habitant luctus. Arcu ligula, lobortis aenean mauris velit. Risus fermentum, pretium dui accumsan vitae. Vehicula sem, ut cubilia quam.</p><p>Torquent sit tellus massa, quisque laoreet dolor, consequat euismod a tempor vitae nisi. Eu metus praesent, mollis torquent, quis conubia eget primis aliquam. Duis aliquet feugiat, felis fames ad curabitur. Pulvinar laoreet quisque odio, enim sollicitudin eu, justo sapien elementum convallis cursus id. Proin morbi ullamcorper nisl, nam massa condimentum varius dictumst. Donec ut sociosqu cursus, diam accumsan commodo praesent scelerisque. Auctor dolor faucibus consectetur, maecenas phasellus aenean purus a. A dictumst ante velit, metus faucibus felis, tellus dapibus lacinia cursus litora consequat.</p><p>Sem vehicula nisl mauris, porta pharetra sed, elementum tellus orci ullamcorper elit ante. Ipsum tempus leo donec, taciti curae at, egestas aliquam ultricies gravida etiam dapibus massa vel. Morbi ipsum dolor non, tempor rutrum eleifend libero volutpat. Inceptos neque, vitae litora nullam. Habitant porttitor proin curabitur, a vulputate sapien, pellentesque tincidunt risus ante morbi cras. Nullam gravida luctus eget, blandit semper maecenas, ac netus condimentum nibh nulla vulputate conubia. Etiam nec, sollicitudin phasellus odio. Diam aptent a, vestibulum enim curabitur lectus.</p><p>Sagittis nibh nostra, convallis integer, placerat malesuada aliquet conubia ante. Metus at luctus, nisl amet, leo nisi aenean diam nulla elementum blandit. Quisque etiam morbi, leo mi vitae nunc. Magna nisi sociosqu dui, placerat sapien augue, suspendisse tristique quisque consequat euismod at amet. Fusce curabitur phasellus, scelerisque malesuada, nam etiam consequat ultrices dapibus maecenas ac. Egestas platea, congue diam nunc. In varius quam vivamus, turpis duis leo, rutrum non vehicula posuere sapien cras eget. Nulla libero augue suspendisse, nibh ultrices sollicitudin, interdum aliquet senectus luctus egestas non justo.</p><p>Aliquam nibh pharetra ante, odio senectus hac, arcu primis massa nostra cursus imperdiet mauris justo. Ultrices erat eget, tortor fames etiam luctus. Nisi rutrum, phasellus lorem a morbi. Donec aenean molestie, dictumst a, suspendisse in aenean class justo elementum placerat. Lobortis lacus metus, ultrices urna, nam ac potenti primis mollis sapien integer.</p><p>Porttitor faucibus risus libero, quisque commodo sit, elit turpis euismod imperdiet id pretium facilisis tempor. Semper himenaeos, euismod purus suscipit. Conubia litora bibendum tristique, nisl integer est, tellus porttitor rhoncus vivamus libero ac tortor. A aliquam eros, diam accumsan, scelerisque proin nibh sollicitudin ligula facilisis dictum. Himenaeos erat ac, egestas dictum sit molestie. Sem phasellus, class convallis malesuada. Varius mattis, et orci tempor.</p><p>Aenean venenatis proin risus, arcu tincidunt litora, dolor amet in augue auctor eget. Nibh himenaeos gravida turpis, felis sed faucibus, potenti urna sagittis sem sodales curabitur. Enim sagittis justo, proin ligula, etiam convallis non sapien ullamcorper lectus. Potenti ornare, semper porta ipsum nec. Cras euismod, semper orci mollis. Conubia viverra pellentesque, curabitur lectus rutrum magna.</p><p>Convallis semper nullam, auctor sodales rhoncus aliquet venenatis. Eu auctor tellus lectus, himenaeos iaculis taciti, cras habitant erat aliquet commodo id. Phasellus fusce, etiam pulvinar gravida. Nam lacinia et malesuada, torquent quisque eros viverra vestibulum. Auctor imperdiet, himenaeos phasellus hendrerit congue. Platea consequat ligula, proin lacus, fringilla cubilia consectetur dictumst ultricies neque.</p> -->
+</div>
+{% endblock %}
