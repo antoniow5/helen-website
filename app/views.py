@@ -3,7 +3,9 @@ from django.http import HttpResponseForbidden, HttpResponse
 from django.contrib.auth import authenticate, login
 
 from .models import Favorite, ProductVariant, Product, Cart, CartItem
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 def index(request):
     return render(request, "index.html")
@@ -107,17 +109,22 @@ def cart(request):
     return render(request, 'cart.html')
 
 
-def login(request):
+def login_page(request):
     if request.user.is_authenticated:
         return redirect('index')  
     else:
         return render(request, 'login.html')
 
 
-def authentication(request):
+def login_user(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
+
+        try:
+            username = User.objects.get(email = email)
+        except:
+            return render(request, 'login.html', {'error': 'Invalid email or password.'})
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
@@ -127,4 +134,11 @@ def authentication(request):
             return render(request, 'login.html', {'error': 'Invalid username or password.'})
     else:
         return HttpResponseForbidden("Invalid request method.")
-    
+
+
+def logout_user(request):
+    pass
+
+
+def register_page(request):
+    return render(request, 'register.html')

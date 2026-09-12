@@ -1250,3 +1250,26 @@ border-radius: 3px;
     }
 }
 
+
+
+.register__container{
+    display: flex;
+    width: 700px;
+    flex-direction: column;
+    margin: 0 auto 70px auto;
+    gap: 20px;
+}
+
+.register__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+@media (max-width: 1250px) {
+    .register__container {
+        width: 100%;
+        margin: 0 auto 50px auto;
+    }
+}

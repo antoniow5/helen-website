@@ -21,16 +21,18 @@ HELEN
     </div>
     <div class="login-container">
         <div class="h1">Вход</div>
-        <form method="post" action="{% url 'authentication' %}">
+        <form method="post" action="{% url 'login_user' %}">
 
             <div class="login-form">
                 {% csrf_token %}
-                <div class="input">
-                    <label class="input__label" for="username">Email</label>
+                <div class="input {% if error %} input--error {% endif %}">
+                    <label class="input__label" for="email">Email</label>
                     <div class="input__wrapper">
-                        <input type="text" id="username" name="username" class="input__field"
-                            placeholder="Введите текст" required>
+                        <input type="text" id="email" name="email" class="input__field"
+                            placeholder="Введите email" required>
+                        
                     </div>
+
                 </div>
 
                 <div class="input input--password">
@@ -44,9 +46,6 @@ HELEN
                     </div>
                 </div>
 
-                {% if error %}
-                <div class="error-message">{{ error }}</div>
-                {% endif %}
 
                 <button class="button button--primary button--line">
                     Войти
@@ -57,21 +56,35 @@ HELEN
 
     </div>
 </div>
+                        {% if error %}
 <script>
-    const button = document.querySelector('.input__visibility');
+    showMessage("{{ error|escapejs }}", 5000);
+</script>
+{% endif %}                       
+
+<script>
+    const visibilityButton = document.querySelector('.input__visibility');
     const password = document.querySelector('#password');
 
-    button.addEventListener('mousedown', function () {
+    visibilityButton.addEventListener('mousedown', function () {
         password.type = 'text';
     });
 
-    button.addEventListener('mouseup', function () {
+    visibilityButton.addEventListener('mouseup', function () {
         password.type = 'password';
     });
 
-    button.addEventListener('mouseleave', function () {
+    visibilityButton.addEventListener('mouseleave', function () {
         password.type = 'password';
     });
+
+    const emailInput = document.querySelector('.input--error')
+    if (emailInput.classList.contains('input--error')) {
+        emailInput.addEventListener('click', function(){
+            emailInput.classList.remove('input--error')
+            emailInput.removeEventListener('click')
+        })
+    };
 </script>
 
 {% endblock %}

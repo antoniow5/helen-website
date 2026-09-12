@@ -274,7 +274,16 @@ img {
 
 }
 
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
 
+
+.input-row .input {
+    flex: 1;
+}
 
 .input__wrapper {
 
@@ -426,6 +435,7 @@ img {
     font-size: 13px;
 
     color: #777;
+    margin-bottom: 10px;
 
 }
 
@@ -652,6 +662,11 @@ img {
     .h1 {
         font-size: 50px !important;
     }
+    .input-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 }
 
 
