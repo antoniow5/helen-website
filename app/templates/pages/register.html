@@ -1,0 +1,160 @@
+{% extends 'container.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+Прикольно
+{% endblock %}
+
+{% block description %}
+HELEN
+{% endblock %}
+
+{% block content %}
+<div class="container-1200">
+    <div class="breadcrumb">
+        <span class="breadcrumb__item">
+            Главная
+        </span>
+        <span class="breadcrumb__item active">
+            Регистрация
+        </span>
+    </div>
+    <div class="register__container">
+        <div class="h1">
+            Регистрация
+        </div>
+        <form method="post" action="{% url 'register_user' %}">
+            <div class="register__form">
+                {% csrf_token %}
+                <div class="input-row">
+
+                    <div class="input {% if error.first_name %} input--error {% endif %}">
+                        <label class="input__label" for="first_name">Фамилия</label>
+                        <div class="input__wrapper">
+                            <input type="text" id="first_name" name="first_name" class="input__field"
+                                placeholder="Введите фамилию" required>
+
+                        </div>
+                        {% if error.first_name %}
+                        <span class="input__message">
+                            {{ error.first_name }}
+                        </span>
+                        {% endif %}
+                    </div>
+
+                    <div class="input {% if error.last_name %} input--error {% endif %}">
+                        <label class="input__label" for="last_name">Имя</label>
+                        <div class="input__wrapper">
+                            <input type="text" id="last_name" name="last_name" class="input__field"
+                                placeholder="Введите имя" required>
+                        </div>
+                        {% if error.last_name %}
+                        <span class="input__message">
+                            {{ error.last_name }}
+                        </span>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <div class="input {% if error.email %} input--error {% endif %}">
+                    <label class="input__label" for="email">Email</label>
+                    <div class="input__wrapper">
+                        <input type="text" id="email" name="email" class="input__field" placeholder="Введите email"
+                            required>
+
+                    </div>
+                    {% if error.email %}
+                    <span class="input__message">
+                        {{ error.email }}
+                    </span>
+                    {% endif %}
+                </div>
+
+                <div class="input-row">
+
+                    <div class="input input--password {% if error.password %} input--error {% endif %}">
+                        <label class="input__label" for="password">Пароль</label>
+                        <div class="input__wrapper">
+                            <input type="password" id="password" name="password" class="input__field"
+                                placeholder="Введите пароль" required>
+                            <button type="button" class="input__visibility">
+                                <img src="{% static 'eye.svg' %}" alt="Toggle visibility">
+                            </button>
+                        </div>
+                        {% if error.password %}
+                        <span class="input__message">
+                            {{ error.password }}
+                        </span>
+                        {% endif %}
+                    </div>
+
+                    <div class="input input--password {% if error.repeat_password %} input--error {% endif %}">
+                        <label class="input__label" for="repeat_password">Повторите пароль</label>
+                        <div class="input__wrapper">
+                            <input type="password" id="repeat_password" name="repeat_password" class="input__field"
+                                placeholder="Введите пароль" required>
+                            <button type="button" class="input__visibility">
+                                <img src="{% static 'eye.svg' %}" alt="Toggle visibility">
+                            </button>
+                        </div>
+                        {% if error.repeat_password %}
+                        <span class="input__message">
+                            {{ error.repeat_password }}
+                        </span>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <button class="button button--primary button--line">
+                    Регистрация
+                </button>
+
+                <div class="text-center">
+                    <span>Уже зарегистрированы? <a class="link" href="{% url 'login_user' %}">Войти</a></span>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% if message %}
+<script>
+    showMessage("{{ message|escapejs }}", 5000);
+</script>
+{% endif %}
+
+<script>
+    const visibilityButton = document.querySelector('.input__visibility');
+    const password = document.querySelector('#password');
+
+    visibilityButton.addEventListener('mousedown', function () {
+        password.type = 'text';
+    });
+
+    visibilityButton.addEventListener('mouseup', function () {
+        password.type = 'password';
+    });
+
+    visibilityButton.addEventListener('mouseleave', function () {
+        password.type = 'password';
+    });
+
+    const inputs = document.querySelectorAll('.input--error');
+
+    inputs.forEach(function (input) {
+        input.addEventListener('click', function () {
+            input.classList.remove('input--error');
+
+            const errorMessage = input.parentElement.querySelector('.input__message');
+
+            if (errorMessage) {
+                errorMessage.remove();
+            }
+        });
+    });
+
+</script>
+
+{% endblock %}

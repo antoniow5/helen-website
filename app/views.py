@@ -1,27 +1,29 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseForbidden, HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 from .models import Favorite, ProductVariant, Product, Cart, CartItem
-from django.contrib.auth import get_user_model
+
 
 User = get_user_model()
 
 def index(request):
-    return render(request, "index.html")
+    return render(request, "pages/index.html")
 
 def index2(request):
-    return render(request, "index2.html")
+    return render(request, "archive/index2.html")
 
 def catalog(request):
-    return render(request, 'catalog.html')
+    return render(request, 'pages/catalog.html')
 
 
-def item(request):
-    return render(request, 'item.html')
+def item2(request):
+    return render(request, 'pages/item.html')
 
 
-def item2(request, item_id):
+def item(request, item_id):
     cart_items_count = 0
     if request.user.is_authenticated:
         cart = Cart.objects.filter(user=request.user).first()
@@ -36,7 +38,7 @@ def item2(request, item_id):
 
 
 
-    product = Product.objects.get_or_404(id=item_id)
+    product = get_object_or_404(Product, id=item_id)
     variants = ProductVariant.objects.filter(product_id=product.id)
 
     variants = variants.filter(stock_quantity__gt=0) 
@@ -65,7 +67,7 @@ def item2(request, item_id):
         # item variants
         
 
-    return render(request, "item.html", context)
+    return render(request, "pages/item.html", context)
 
 
 def item_favorite(request, item_id):
@@ -101,37 +103,37 @@ def add_to_cart(request, variant_id):
         cart_item.quantity += 1
         cart_item.save()
 
-    return HttpResponse(status=204)  # Redirect to the cart page after adding the item
-
+    return HttpResponse(status=204)  
 
 
 def cart(request):
-    return render(request, 'cart.html')
+    return render(request, 'pages/cart.html')
 
 
-def login_page(request):
-    if request.user.is_authenticated:
-        return redirect('index')  
-    else:
-        return render(request, 'login.html')
 
 
 def login_user(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            return redirect('index')  
+        else:
+            return render(request, 'pages/login.html')
+        
+    elif request.method == 'POST':
+        email = request.POST.get('email').strip().lower()
         password = request.POST.get('password')
 
         try:
             username = User.objects.get(email = email)
         except:
-            return render(request, 'login.html', {'error': 'Invalid email or password.'})
+            return render(request, 'pages/login.html', {'error': 'Invalid email or password.'})
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             return redirect('index')  
         else:
-            return render(request, 'login.html', {'error': 'Invalid username or password.'})
+            return render(request, 'pages/login.html', {'error': 'Invalid username or password.'})
     else:
         return HttpResponseForbidden("Invalid request method.")
 
@@ -140,5 +142,72 @@ def logout_user(request):
     pass
 
 
-def register_page(request):
-    return render(request, 'register.html')
+def register_user(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            return redirect('index')  
+        else:
+            return render(request, 'pages/egister.html')
+
+    if request.method == 'POST':
+        errors = {}
+        
+        email = request.POST.get('email').strip().lower()
+        password = request.POST.get('password')
+        repeat_password = request.POST.get('repeat_password')
+        first_name = request.POST.get('first_name').strip()
+        last_name = request.POST.get('last_name').strip()
+
+        required_fields = { 
+            'email': email, 
+            'password': password, 
+            'repeat_password': repeat_password, 
+            'first_name': first_name, 
+            'last_name': last_name, 
+            } 
+        
+        for field, value in required_fields.items(): 
+            if not value: 
+                errors[field] = 'Вы должны заполнить это поле'
+
+        if errors:
+            return render(request, 'pages/register.html', context={'error': errors})
+        
+        if password and repeat_password and password != repeat_password: 
+            errors['repeat_password'] = 'Пароли не совпадают'
+
+        if User.objects.filter(email=email).exists():
+            errors['email'] = "Пользователь с таким email уже существует"
+
+        try: 
+            validate_email(email) 
+        except ValidationError: 
+            errors['email'] = 'Введите корректный адрес электронной почты'
+
+
+        if len(first_name) > 35: 
+            errors['first_name'] = 'Фамилия не должна превышать 35 символов'
+
+         
+        if len(last_name) > 35: 
+            errors['last_name'] = 'Имя не должно превышать 35 символов'
+
+        if errors:
+            return render(request, 'pages/register.html', context={'error': errors})
+
+        #registration logic
+
+        try:
+            user = User(
+                username=email,
+                email=email,
+                first_name = first_name,
+                last_name = last_name
+            )
+            user.set_password(password)
+            user.save()
+        except:
+            message = "Что-то пошло не так"
+            return render(request, 'pages/register.html', context={'message': message})
+        login(request, user)
+        return redirect('index')

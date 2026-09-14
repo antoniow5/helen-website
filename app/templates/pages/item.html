@@ -1,0 +1,668 @@
+{% extends 'container.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+Прикольно
+{% endblock %}
+
+{% block description %}
+HELEN
+{% endblock %}
+
+{% block content %}
+<div class="container-1200">
+    <div class="breadcrumb">
+        <span class="breadcrumb__item">
+            Главная
+        </span>
+        <span class="breadcrumb__item">
+            Каталог
+        </span>
+        <span class="breadcrumb__item active">
+            Костюм женский
+        </span>
+    </div>
+    <div class="item">
+        <div class="item-photos">
+            <img class="item-photo" src="{% static 'item-image.jpg' %}">
+            <img class="item-photo" src="{% static 'item-image.jpg' %}">
+            <img class="item-photo" src="{% static 'item-image.jpg' %}">
+        </div>
+        <div class="item-body">
+            <div class="item-body__desktop_like">
+                <div class="like-button active">
+                    <img src="{% static 'heart-full.svg' %}">
+                </div>
+            </div>
+            <div class="item-body__title">
+                <div class="item-body__title__h1">
+                    {{ product.name }}
+                </div>
+            </div>
+            <div class="item-body__inner">
+
+                <div class="item-body__fields">
+                    <div class="item-body__fields__left">
+                        <div class="item-body__body">
+                            <div class="item-body__fields__field">
+
+                                <span class="item-body__fields__key">
+                                    Артикул:
+                                </span>
+                                <span class="item-body__fields__value">
+                                    {{ product.articul }}
+                                </span>
+                            </div>
+                            <div class="item-body__fields__field">
+
+                                <span class="item-body__fields__key">
+                                    Статус:
+                                </span>
+                                <span class="item-body__fields__value">
+                                    В наличии
+                                </span>
+                            </div>
+                        </div>
+                        <div class="item-body__mobile_like">
+                            <div class="like-button active">
+                                <img src="{% static 'heart-full.svg' %}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-body__fields__right">
+                        <div class="item-body__fields__field item-body__fields__field--price">
+
+                            <span class="item-body__fields__key">
+                                Стоимость:
+                            </span>
+                            <span class="item-body__fields__value">
+                                {{ product.price }} ₽
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="item-body__choice_cards">
+                    <div class="item-body__choice_cards_form" id = "size-form">
+                        <div class="item-body__choice_cards__label">
+                            Размер:
+                        </div>
+                        <div class="choice-cards" id = 'sizes'>
+           
+                        </div>
+                    </div>
+                    <div class="item-body__choice_cards_form" id = "color-form">
+                        <div class="item-body__choice_cards__label">
+                            Цвет:
+                        </div>
+                        <div class="choice-cards" id = "colors">
+                           
+                        </div>
+                    </div>
+                </div>
+                <script>
+const variants = [
+    {% for variant in variants %}
+{
+    id: {{ variant.id }},
+    size: {% if variant.size %}
+    {
+        id: {{ variant.size.id }},
+        name: "{{ variant.size.name|escapejs }}",
+            code: "{{ variant.size.code|escapejs }}"
+    }
+    {% else %}
+    null
+    {% endif %},
+
+    color: {% if variant.color %}
+    {
+        id: {{ variant.color.id }},
+        name: "{{ variant.color.name|escapejs }}",
+        hex: "{{ variant.color.hex_code|escapejs }}"
+    }
+    {% else %}
+    null
+    {% endif %}
+} {% if not forloop.last %}, {% endif %}
+{% endfor %}
+                        ];
+
+
+const sizesContainer = document.querySelector('#sizes');
+const colorsContainer = document.querySelector('#colors');
+
+const sizeForm = document.querySelector('#size-form');
+const colorForm = document.querySelector('#color-form');
+
+const sizes = [
+    ...new Map(
+        variants
+            .filter(variant => variant.size)
+            .map(variant => [variant.size.id, variant.size])
+    ).values()
+];
+
+const colors = [
+    ...new Map(
+        variants
+            .filter(variant => variant.color)
+            .map(variant => [variant.color.id, variant.color])
+    ).values()
+];
+
+
+if (sizes.length === 0) {
+    sizeForm.style.display = 'none';
+}
+
+if (colors.length === 0) {
+    colorForm.style.display = 'none';
+}
+
+sizes.forEach(size => {
+    const card = document.createElement('div');
+    card.className = 'choice-card';
+    card.dataset.size = size.id;
+    card.innerHTML = `
+        <div class="choice-card-title">
+            ${size.code}
+        </div>
+
+        <div class="choice-card-subtitle">
+            ${size.name}
+        </div>
+    `;
+    sizesContainer.appendChild(card);
+});
+
+
+colors.forEach(color => {
+    const card = document.createElement('div');
+    card.className = 'choice-card color';
+    card.dataset.color = color.id;
+    card.style.background = color.hex;
+    card.title = color.name;
+    colorsContainer.appendChild(card);
+});
+
+
+let selectedSize = null;
+let selectedColor = null;
+
+
+if (sizes.length > 0) {
+    selectedSize = sizes[0].id;
+
+    const firstSizeCard = document.querySelector(
+        `[data-size="${selectedSize}"]`
+    );
+
+    firstSizeCard.classList.add('active');
+}
+
+
+if (colors.length > 0) {
+    selectedColor = colors[0].id;
+
+    const firstColorCard = document.querySelector(
+        `[data-color="${selectedColor}"]`
+    );
+
+    firstColorCard.classList.add('active');
+}
+
+
+function updateSizes() {
+
+    document.querySelectorAll('[data-size]').forEach(card => {
+
+        const sizeId = Number(card.dataset.size);
+
+        const available = variants.some(variant => {
+
+            if (!variant.size || variant.size.id !== sizeId) {
+                return false;
+            }
+
+            // If color is selected, size must exist for that color
+            if (
+                selectedColor !== null &&
+                (!variant.color ||
+                    variant.color.id !== selectedColor)
+            ) {
+                return false;
+            }
+
+            return true;
+        });
+
+        card.classList.toggle('disabled', !available);
+    });
+
+
+    // --------------------------------------------------
+    // If current size is unavailable, select first available
+    // --------------------------------------------------
+
+    if (selectedSize !== null) {
+
+        const currentSizeAvailable = variants.some(variant => {
+
+            if (!variant.size || variant.size.id !== selectedSize) {
+                return false;
+            }
+
+            if (
+                selectedColor !== null &&
+                (!variant.color ||
+                    variant.color.id !== selectedColor)
+            ) {
+                return false;
+            }
+
+            return true;
+        });
+
+
+        if (!currentSizeAvailable) {
+
+            const firstAvailableSize = sizes.find(size => {
+
+                return variants.some(variant => {
+
+                    if (!variant.size ||
+                        variant.size.id !== size.id) {
+                        return false;
+                    }
+
+                    if (
+                        selectedColor !== null &&
+                        (!variant.color ||
+                            variant.color.id !== selectedColor)
+                    ) {
+                        return false;
+                    }
+
+                    return true;
+                });
+
+            });
+
+
+            if (firstAvailableSize) {
+
+                selectedSize = firstAvailableSize.id;
+
+                document
+                    .querySelectorAll('[data-size]')
+                    .forEach(card => {
+                        card.classList.remove('active');
+                    });
+
+                const firstSizeCard = document.querySelector(
+                    `[data-size="${selectedSize}"]`
+                );
+
+                firstSizeCard.classList.add('active');
+
+            } else {
+
+                selectedSize = null;
+
+                document
+                    .querySelectorAll('[data-size]')
+                    .forEach(card => {
+                        card.classList.remove('active');
+                    });
+            }
+        }
+    }
+}
+
+
+// --------------------------------------------------
+// Size click
+// --------------------------------------------------
+
+document.querySelectorAll('[data-size]').forEach(card => {
+
+    card.addEventListener('click', () => {
+
+        if (card.classList.contains('disabled')) {
+            return;
+        }
+
+        const sizeId = Number(card.dataset.size);
+
+
+        selectedSize = sizeId;
+
+        document
+                .querySelectorAll('[data-size]')
+                .forEach(card => {
+                    card.classList.remove('active');
+                });
+
+            card.classList.add('active');
+
+        // IMPORTANT:
+        // Do NOT update colors here.
+    });
+});
+
+
+// --------------------------------------------------
+// Color click
+// --------------------------------------------------
+
+document.querySelectorAll('[data-color]').forEach(card => {
+
+    card.addEventListener('click', () => {
+
+        const colorId = Number(card.dataset.color);
+
+
+            selectedColor = colorId;
+
+            document
+                .querySelectorAll('[data-color]')
+                .forEach(card => {
+                    card.classList.remove('active');
+                });
+
+            card.classList.add('active');
+
+        updateSizes();
+    });
+});
+
+
+// --------------------------------------------------
+// Initial update
+// --------------------------------------------------
+
+updateSizes();
+
+
+
+function getSelectedVariant() {
+
+    return variants.find(variant => {
+
+        const sizeMatches =
+            selectedSize === null ||
+            (variant.size && variant.size.id === selectedSize);
+
+        const colorMatches =
+            selectedColor === null ||
+            (variant.color && variant.color.id === selectedColor);
+
+        return sizeMatches && colorMatches;
+    });
+}
+                </script>
+                <div class="item-body__button">
+                    <button class="button button--primary button--decor-line"
+                    onclick="console.log(getSelectedVariant())">
+
+                        <span class="button__line button__line--left"></span>
+
+                        <span class="button__text">
+                            Добавить в корзину
+                        </span>
+                        <span class="button__icon button__icon--right"> <img src="{% static 'shopping-cart.svg' %}"
+                                alt="">
+                        </span>
+
+
+                    </button>
+
+                </div>
+                <div class="item-body__accordions">
+                    <div class="accordion-container">
+                        <div class="accordion">
+                            <div class="accordion-title">
+                                Description
+                            </div>
+                            <div class="accordion-button">
+                                +
+                            </div>
+                        </div>
+                        <div class="accordion-panel">
+                            {{ product.description }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="similar">
+        <div class="similar__title">
+            <div class="h1">
+                ПОХОЖЕЕ
+            </div>
+        </div>
+        <div class="similar__cards">
+            <div class="similar__cards__card">
+                <div class="similar__cards__card__img">
+                    <img src="{% static 'similar.png'%}">
+                </div>
+                <div class="similar__cards__card__title">
+                    Костюм женский (брюки + пиджак)
+                </div>
+                <div class="similar__cards__card__price">
+                    13 499 ₽
+                </div>
+                <div class="similar__cards__card__button">
+                    <button class="button button--small button--ghost button--decor-line button--flex ">
+
+                        <span class="button__line button__line--left"></span>
+
+                        <span class="button__text">
+                            Добавить в корзину
+                        </span>
+                        <span class="button__icon button__icon--right"> <img src="{% static 'shopping-cart2.svg' %}"
+                                alt="">
+                        </span>
+
+
+                    </button>
+
+                </div>
+
+            </div>
+            <div class="similar__cards__card">
+                <div class="similar__cards__card__img">
+                    <img src="{% static 'similar.png'%}">
+                </div>
+                <div class="similar__cards__card__title">
+                    Костюм женский (брюки + пиджак)
+                </div>
+                <div class="similar__cards__card__price">
+                    13 499 ₽
+                </div>
+                <div class="similar__cards__card__button">
+                    <button class="button button--small button--ghost button--decor-line button--flex">
+
+                        <span class="button__line button__line--left"></span>
+
+                        <span class="button__text">
+                            Добавить в корзину
+                        </span>
+                        <span class="button__icon button__icon--right"> <img src="{% static 'shopping-cart2.svg' %}"
+                                alt="">
+                        </span>
+
+
+                    </button>
+
+                </div>
+
+            </div>
+            <div class="similar__cards__card">
+                <div class="similar__cards__card__img">
+                    <img src="{% static 'similar.png'%}">
+                </div>
+                <div class="similar__cards__card__title">
+                    Костюм женский (брюки + пиджак)
+                </div>
+                <div class="similar__cards__card__price">
+                    13 499 ₽
+                </div>
+                <div class="similar__cards__card__button">
+                    <button class="button button--small button--ghost button--decor-line button--flex ">
+
+                        <span class="button__line button__line--left"></span>
+
+                        <span class="button__text">
+                            Добавить в корзину
+                        </span>
+                        <span class="button__icon button__icon--right"> <img src="{% static 'shopping-cart2.svg' %}"
+                                alt="">
+                        </span>
+
+
+                    </button>
+
+                </div>
+
+            </div>
+            <div class="similar__cards__card">
+                <div class="similar__cards__card__img">
+                    <img src="{% static 'similar.png'%}">
+                </div>
+                <div class="similar__cards__card__title">
+                    Костюм женский (брюки + пиджак)
+                </div>
+                <div class="similar__cards__card__price">
+                    13 499 ₽
+                </div>
+                <div class="similar__cards__card__button">
+                    <button class="button button--small button--ghost button--decor-line button--flex ">
+
+                        <span class="button__line button__line--left"></span>
+
+                        <span class="button__text">
+                            Добавить в корзину
+                        </span>
+                        <span class="button__icon button__icon--right"> <img src="{% static 'shopping-cart2.svg' %}"
+                                alt="">
+                        </span>
+
+
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reviews">
+        <div class="reviews__title">
+            <div class="h1">
+                ОТЗЫВЫ
+            </div>
+        </div>
+        <div class="reviews__cards">
+            <div class="reviews__cards__card">
+                <div class="reviews__cards__card__top">
+                    <div class="reviews__cards__card__avatar">
+                        <img src="{% static 'woman.png' %}">
+                    </div>
+                    <div class="reviews__cards__card__user">
+                        <p>Наталья</p>
+                        <p>
+                            <img src="{% static 'star.svg' %}">
+                            <img src="{% static 'star.svg' %}">
+                            <img src="{% static 'star.svg' %}">
+                            <img src="{% static 'star.svg' %}">
+                            <img src="{% static 'star.svg' %}">
+
+                        </p>
+                    </div>
+                </div>
+                <div class="reviews__cards__card__bottom">
+                    <p>Прежде всего, укрепление и развитие внутренней структуры выявляет срочную потребность модели
+                        развития. Не следует, однако, забывать, что социально-экономическое развитие представляет
+                        собой
+                        интересный эксперимент проверки экономической целесообразности принимаемых решений. </p>
+                </div>
+
+
+            </div>
+            <div class="reviews__cards__card">
+                <div class="reviews__cards__card__top">
+                    <div class="reviews__cards__card__avatar">
+                        <img>
+                    </div>
+                    <div class="reviews__cards__card__user">
+                        <p>Наталья</p>
+                        5 stars
+                    </div>
+                </div>
+                <div class="reviews__cards__card__bottom">
+                    <p>Прежде всего, укрепление и развитие внутренней структуры выявляет срочную потребность модели
+                        развития. Не следует, однако, забывать, что социально-экономическое развитие представляет
+                        собой
+                        интересный эксперимент проверки экономической целесообразности принимаемых решений. </p>
+                </div>
+
+
+            </div>
+            <div class="reviews__cards__card">
+                <div class="reviews__cards__card__top">
+                    <div class="reviews__cards__card__avatar">
+                        <img>
+                    </div>
+                    <div class="reviews__cards__card__user">
+                        <p>Наталья</p>
+                        5 stars
+                    </div>
+                </div>
+                <div class="reviews__cards__card__bottom">
+                    <p>Прежде всего, укрепление и развитие внутренней структуры выявляет срочную потребность модели
+                        развития. Не следует, однако, забывать, что социально-экономическое развитие представляет
+                        собой
+                        интересный эксперимент проверки экономической целесообразности принимаемых решений. </p>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="reviews__button">
+            <button class="button button--ghost button--decor-line button--small">
+                <span class="button__line button__line--left"></span>
+
+                <span class="button__text">
+                    Показать еще
+                </span>
+                <span class="button__line button__line--right"></span>
+
+            </button>
+
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.accordion').forEach(accordion => {
+            accordion.addEventListener('click', () => {
+                accordion.parentElement.classList.toggle('active');
+                const button = accordion.querySelector('.accordion-button');
+                button.textContent = button.textContent.trim() === '+' ? '-' : '+';
+            });
+        });
+        showMessage('Товар добавлен в корзину', 2000);
+
+        document.querySelectorAll('.like-button').forEach(button => {
+            button.addEventListener('click', () => {
+                button.classList.toggle('active');
+                if (button.classList.contains('active')) {
+                    showMessage('Товар добавлен в избранное', 2000);
+                } else {
+                    showMessage('Товар удален из избранного', 2000);
+                }
+            });
+        });
+    </script>
+</div>
+{% endblock %}

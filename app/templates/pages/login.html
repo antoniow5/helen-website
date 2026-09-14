@@ -50,13 +50,15 @@ HELEN
                 <button class="button button--primary button--line">
                     Войти
                 </button>
-
+                <div class = "text-center">
+                    <span>Еще нет аккаунта? <a class = "link" href = "{% url 'register_user' %}">Зарегистрироваться</a></span>
+                </div>
             </div>
         </form>
 
     </div>
 </div>
-                        {% if error %}
+{% if error %}
 <script>
     showMessage("{{ error|escapejs }}", 5000);
 </script>

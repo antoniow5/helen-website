@@ -39,6 +39,7 @@ body:has(.menu_mobile.open) {
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 .container-1200 {
@@ -887,6 +888,7 @@ a {
     gap: 10px;
     flex-direction: column;
 }
+
 .item-body__fields__field--price .item-body__fields__key {
     display: block;
 }
@@ -968,6 +970,7 @@ a {
 .filters_mobile .choice__button {
     width: 100% !important;
 }
+
 .filters_mobile .choice {
     width: 100% !important;
 }
@@ -1044,6 +1047,7 @@ a {
         height: 350px;
         border-radius: 4px;
     }
+
     .catalog-item__mobile-button {
         display: block;
         text-align: center;
@@ -1051,7 +1055,10 @@ a {
 
 }
 
-.mobile_sort, .mobile_size, .mobile_collections, .mobile_color {
+.mobile_sort,
+.mobile_size,
+.mobile_collections,
+.mobile_color {
     position: fixed;
     left: 0;
     bottom: 0;
@@ -1069,12 +1076,15 @@ a {
 .mobile_sort.open {
     transform: translateY(0);
 }
+
 .mobile_collections.open {
     transform: translateY(0);
 }
+
 .mobile_size.open {
     transform: translateY(0);
 }
+
 .mobile_color.open {
     transform: translateY(0);
 }
@@ -1086,7 +1096,7 @@ a {
     z-index: -1;
 }
 
-.index-banner{
+.index-banner {
     margin-top: 240px;
     display: flex;
     flex-direction: column;
@@ -1095,7 +1105,7 @@ a {
     margin-bottom: 170px;
 }
 
-.index-banner__title{
+.index-banner__title {
     font-family: 'Mirra Auriolic', sans-serif;
     font-weight: 400;
     font-size: 160px;
@@ -1104,7 +1114,7 @@ a {
     text-transform: uppercase;
 }
 
-.index-banner__subtitle{
+.index-banner__subtitle {
     font-size: 18px;
     font-weight: 400;
     text-transform: uppercase;
@@ -1122,7 +1132,8 @@ a {
 
 .index-grid-left {
     grid-column: 1;
-    grid-row: 1 / span 2; /* occupies both rows */
+    grid-row: 1 / span 2;
+    /* occupies both rows */
     width: 590px !important;
     height: 910px !important;
 
@@ -1133,15 +1144,16 @@ a {
     height: 443px;
 }
 
-.index-grid-left img, .index-grid-item img {
-border-radius: 3px;
+.index-grid-left img,
+.index-grid-item img {
+    border-radius: 3px;
     object-fit: cover;
     width: 100%;
     height: 100%;
 
 }
 
-.index-grid-item__title{
+.index-grid-item__title {
     font-family: 'Mirra Auriolic', sans-serif;
     font-weight: 400;
     font-size: 32px;
@@ -1150,19 +1162,19 @@ border-radius: 3px;
     left: 20px;
 }
 
-.item-body__choice_cards{
+.item-body__choice_cards {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
 @media (max-width: 1250px) {
-    .item-body__choice_cards{
+    .item-body__choice_cards {
         flex-direction: column;
         gap: 38px;
     }
 
-    .item-body__fields{
+    .item-body__fields {
         flex-direction: column;
         gap: 20px;
     }
@@ -1177,7 +1189,7 @@ border-radius: 3px;
 
 }
 
-.item-body__choice_cards__label{
+.item-body__choice_cards__label {
     font-size: 15px;
     font-weight: 300;
     color: var(--font-secondary);
@@ -1191,34 +1203,38 @@ border-radius: 3px;
     margin-bottom: 35px;
 }
 
-.item-body__mobile_like{
+.item-body__mobile_like {
     display: none;
 }
 
-.item-body__inner{
+.item-body__inner {
     display: flex;
     gap: 38px;
     flex-direction: column;
 }
 
 @media (max-width: 1250px) {
-    .item-body__mobile_like{
+    .item-body__mobile_like {
         display: block;
     }
-    .item-body__fields__left{
+
+    .item-body__fields__left {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     }
-    .item-body__body{
+
+    .item-body__body {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
-    .item-body__desktop_like{
+
+    .item-body__desktop_like {
         display: none;
     }
-    .item-body{
+
+    .item-body {
         flex-direction: column;
         margin-top: 20px;
     }
@@ -1252,7 +1268,7 @@ border-radius: 3px;
 
 
 
-.register__container{
+.register__container {
     display: flex;
     width: 700px;
     flex-direction: column;
@@ -1271,5 +1287,23 @@ border-radius: 3px;
     .register__container {
         width: 100%;
         margin: 0 auto 50px auto;
+    }
+}
+
+
+.item-body__title__h1 {
+
+    font-size: 68px;
+    font-family: 'Mirra Auriolic', sans-serif;
+    color: var(--theme-yellow-color)
+}
+
+@media (max-width: 1250px) {
+
+    .item-body__title__h1 {
+        font-size: 32px;
+    }
+    .item-body__fields__value{
+        font-size: 15px;
     }
 }

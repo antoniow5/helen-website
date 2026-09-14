@@ -657,6 +657,7 @@ img {
 
 
 
+
 @media (max-width: 1250px) {
 
     .h1 {
@@ -1005,16 +1006,13 @@ img {
     cursor: default;
 }
 
-.choice-card:hover {
-    border: 3px solid #24A188;
-    padding: 10px;
+
+.choice-card.active:hover{
+    border: none !important;
+    padding: 12px !important;
 }
 
 
-.choice-card.active.choice-card:hover{
-    border: none;
-    padding: 12px
-}
 
 .choice-card.disabled{
     border: 1px dashed #444;
@@ -1043,6 +1041,12 @@ img {
     border: 4px solid var(--theme-yellow-color);
     background-color: inherit;
 }
+
+.choice-card.active.color:hover{
+    border: 4px solid var(--theme-yellow-color) !important;
+    background-color: inherit;
+}
+
 .choice-card-title{
     text-align: center;
 }
@@ -1176,4 +1180,14 @@ img {
         opacity: 0;
         transform: translateX(30px);
     }
+}
+
+.text-center{
+    text-align: center;
+}
+
+.link {
+    color: var(--theme-yellow-color);
+    text-decoration: underline;
+
 }

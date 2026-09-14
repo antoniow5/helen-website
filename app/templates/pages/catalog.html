@@ -261,14 +261,20 @@ HELEN
         </div>
         <div class="catalog-item">
             <div class="catalog-item__photo">
+                 <a href = "{% url 'item' item_id=1%}">
                 <img src="{% static 'item-image.jpg' %}">
+                </a>
             </div>
             <div class="catalog-item__text">
                 <div class="catalog-item__title">
+                    <a href = "{% url 'item' item_id=1%}">
                     Костюм-пиджак женский
+                    </a>
                 </div>
                 <div class="catalog-item__price">
+                    <a href = "{% url 'item' item_id=1%}">
                     13 499 ₽
+                    </a>
                 </div>
             </div>
         </div>

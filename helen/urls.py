@@ -30,14 +30,14 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('index2', views.index2, name='index2'),
 
-    path('login-page', views.login_page, name='login_page'),
-    path('login-page/', views.login_page, name='login_page'),
+    # path('login-page', views.login_page, name='login_page'),
+    # path('login-page/', views.login_page, name='login_page'),
 
-    path('auth', views.login_user, name="login_user"),
-    path('auth', views.login_user, name="login_user"),
+    path('login-user', views.login_user, name="login_user"),
+    path('login-user', views.login_user, name="login_user"),
 
-    path('item', views.item),
-    path('item/', views.item),
+    path('item/<int:item_id>', views.item, name='item'),
+    path('item/<int:item_id>/', views.item),
 
     path('catalog', views.catalog),
     path('catalog/', views.catalog),
@@ -47,8 +47,12 @@ urlpatterns = [
 
     path('logout', logout),
 
-    path('register-page', views.register_page, name="register_page"),
-    path('register-page/', views.register_page, name="register_page")
+    # path('register-page', views.register_page, name="register_page"),
+    # path('register-page/', views.register_page, name="register_page"),
+
+    path('register-user', views.register_user, name="register_user"),
+    path('register-user/', views.register_user, name="register_user")
+
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

@@ -67,11 +67,21 @@ class ProductVariant(models.Model):
         
 
     def __str__(self):
-        return f"{self.product.name} - {self.color.name} - {self.size.name}"
+        if self.color:
+            color = self.color.name
+        else:
+            color = '-'
+
+        if self.size:
+            size = self.size.name
+        else:
+            size = '-'
+        return f"{self.product.name} - {color} - {size}"
 
 
 class Cart(models.Model):
     session_id = models.CharField(max_length=100, unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
 
 
