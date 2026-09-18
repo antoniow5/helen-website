@@ -11,7 +11,6 @@ HELEN
 {% endblock %}
 
 {% block container %}
-{{ request.user }}
 <!-- <div class="overlay" id="overlay"></div> -->
  <script>
 function showMessage(text, duration = 4000) {
@@ -92,7 +91,7 @@ function removeMessage(message) {
                             <img class="menu_desktop__icon" src="{% static 'shopping-cart.svg' %}" width="24">
                         </a>
                         <span class="menu_desktop__cart_badge">
-                            3
+                            {{ cart_items_count }}
                         </span>
                     </div>
                 </div>

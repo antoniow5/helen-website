@@ -37,7 +37,6 @@ class Color(models.Model):
         return self.name
 
 
-
 class Size(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
     code = models.CharField(max_length=10, null=False, blank=False) 
@@ -59,6 +58,10 @@ class ProductVariant(models.Model):
 
 
     def save(self, *args, **kwargs):
+        if not self.product.variant_by_size and self.size:
+            raise ValueError("This product does not have variants by size.")
+        if not self.product.variant_by_color and self.color:
+            raise ValueError("This product does not have variants by color.")
         if self.product.variant_by_color and not self.color:
             raise ValueError("Color must be specified for this product.")
         if self.product.variant_by_size and not self.size:
@@ -81,8 +84,7 @@ class ProductVariant(models.Model):
 
 class Cart(models.Model):
     session_id = models.CharField(max_length=100, unique=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, unique=True)
 
 
 class CartItem(models.Model):

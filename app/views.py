@@ -1,22 +1,56 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseForbidden, HttpResponse
 from django.contrib.auth import authenticate, login, get_user_model
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.http import HttpResponseForbidden, HttpResponse, JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Favorite, ProductVariant, Product, Cart, CartItem
-
+from .models import Favorite, ProductVariant, Product, Cart, CartItem, Size, Color
 
 User = get_user_model()
+
+
+def get_cart_count(request):
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(
+            user=request.user
+        )
+    else:
+        # Make sure the session has a session key
+        if not request.session.session_key:
+            request.session.create()
+
+        session_id = request.session.session_key
+
+        cart, created = Cart.objects.get_or_create(
+            session_id=session_id
+        )
+
+    return cart.items.count()
+               
+
 
 def index(request):
     return render(request, "pages/index.html")
 
+
 def index2(request):
     return render(request, "archive/index2.html")
 
+
 def catalog(request):
-    return render(request, 'pages/catalog.html')
+
+    cart_items_count = get_cart_count(request)
+
+    sizes = Size.objects.all().order_by('code')
+    colors = Color.objects.all().order_by('hex_code')
+
+    context = {
+                'cart_items_count': cart_items_count,
+
+                'sizes': sizes,
+                'colors': colors,
+               }
+    return render(request, 'pages/catalog.html', context)
 
 
 def item2(request):
@@ -24,25 +58,14 @@ def item2(request):
 
 
 def item(request, item_id):
-    cart_items_count = 0
-    if request.user.is_authenticated:
-        cart = Cart.objects.filter(user=request.user).first()
-        if cart:
-            cart_items_count = cart.items.count()
-    else:
-        session_id = request.session.session_key
-        if session_id:
-            cart = Cart.objects.filter(session_id=session_id).first()
-            if cart:
-                cart_items_count = cart.items.count()
 
-
+    cart_items_count = get_cart_count(request)
 
     product = get_object_or_404(Product, id=item_id)
-    variants = ProductVariant.objects.filter(product_id=product.id)
 
+    variants = ProductVariant.objects.filter(product_id=product.id)
     variants = variants.filter(stock_quantity__gt=0) 
-    variants = variants.select_related('color', 'size')  
+    variants = variants.select_related('color', 'size').order_by('size__name', 'color__hex_code')  
 
     if request.user.is_authenticated:
         is_favorited = Favorite.objects.filter(user=request.user, product_id=product.id).exists()
@@ -50,13 +73,13 @@ def item(request, item_id):
         is_favorited = False
 
     context = {
+        'cart_items_count': cart_items_count,
+
         'product': product,
         'variants': variants,
         'is_favorited': is_favorited,
-        'cart_items_count': cart_items_count,
     }
 
-    
     # what to send
     # Basics
         # request user or session
@@ -66,49 +89,76 @@ def item(request, item_id):
         # item photos
         # item variants
         
-
     return render(request, "pages/item.html", context)
 
 
 def item_favorite(request, item_id):
-    product = Product.objects.get_or_404(id=item_id)
+    product = get_object_or_404(Product, id=item_id)
 
     if not request.user.is_authenticated:
-        return HttpResponseForbidden("You must be logged in to favorite an item.")
+        return JsonResponse({'status': False, 'message': "You must be logged in to favorite an item."}, 
+                            status = 403)
     
     favorite, created = Favorite.objects.get_or_create(user=request.user, product_id=product.id)
     if not created:
         favorite.delete()
+        status = 'deleted'
+    else:
+        status='created'
+        
+    return JsonResponse({'status': True, 'message': status})  
 
-    return HttpResponse(status=204)  
 
 
 def add_to_cart(request, variant_id):
-    variant = ProductVariant.objects.get_or_404(id=variant_id)
+    variant = get_object_or_404(ProductVariant, id=variant_id)
 
     if variant.stock_quantity <= 0:
-        return HttpResponse("This product variant is out of stock.", status=400)
+        return JsonResponse({
+            'status': False,
+            'message': 'This product variant is out of stock.'
+        }, status=400)
 
     if request.user.is_authenticated:
-        cart, created = Cart.objects.get_or_create(user=request.user)
+        cart, created = Cart.objects.get_or_create(
+            user=request.user
+        )
     else:
         session_id = request.session.session_key
+
         if not session_id:
             request.session.create()
             session_id = request.session.session_key
-        cart, created = Cart.objects.get_or_create(session_id=session_id)
 
-    cart_item, created = CartItem.objects.get_or_create(cart=cart, product_variant=variant)
+        cart, created = Cart.objects.get_or_create(
+            session_id=session_id
+        )
+
+    cart_item, created = CartItem.objects.get_or_create(
+        cart=cart,
+        product_variant=variant,
+        defaults={'quantity': 1}
+    )
+
     if not created:
         cart_item.quantity += 1
         cart_item.save()
 
-    return HttpResponse(status=204)  
+    return JsonResponse({
+        'status': True,
+        'message': 'Product added to cart.',
+        'quantity': cart_item.quantity,
+        'cart_items_count': cart.items.count()
+    })
 
 
 def cart(request):
     return render(request, 'pages/cart.html')
 
+
+
+def user_container(request):
+    return render(request, 'pages/user_container.html')
 
 
 
@@ -147,7 +197,7 @@ def register_user(request):
         if request.user.is_authenticated:
             return redirect('index')  
         else:
-            return render(request, 'pages/egister.html')
+            return render(request, 'pages/register.html')
 
     if request.method == 'POST':
         errors = {}
@@ -196,7 +246,6 @@ def register_user(request):
             return render(request, 'pages/register.html', context={'error': errors})
 
         #registration logic
-
         try:
             user = User(
                 username=email,
@@ -209,5 +258,7 @@ def register_user(request):
         except:
             message = "Что-то пошло не так"
             return render(request, 'pages/register.html', context={'message': message})
+        
         login(request, user)
+
         return redirect('index')

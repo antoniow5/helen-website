@@ -15,7 +15,7 @@
     border-radius: 4px;
     border: none;
 
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
 
     cursor: pointer;
@@ -90,6 +90,7 @@
     color: var(--theme-yellow-color);
 
     border: none;
+    padding: 0;
 
 }
 
@@ -651,7 +652,9 @@ img {
 .h1 {
     font-size: 68px;
     font-family: 'Mirra Auriolic', sans-serif;
-    color: var(--theme-yellow-color)
+    color: var(--theme-yellow-color);
+    line-height: 67px;
+
 
 }
 
@@ -662,7 +665,9 @@ img {
 
     .h1 {
         font-size: 50px !important;
+
     }
+    
     .input-row {
     display: flex;
     flex-direction: column;
@@ -740,6 +745,25 @@ img {
 .checkbox__mark {
 
     width: 20px;
+    height: 20px;
+
+    margin-right: 12px;
+
+    border: 1px solid var(--theme-yellow-color);
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    transition: .2s;
+
+}
+
+.checkbox__color{
+        width: 20px;
     height: 20px;
 
     margin-right: 12px;
@@ -979,7 +1003,8 @@ img {
 
 .choice-cards{
     display: flex;
-    gap: 8px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .choice-card{
@@ -1006,6 +1031,9 @@ img {
     cursor: default;
 }
 
+.choice-card.color{
+    border: 0px;
+}
 
 .choice-card.active:hover{
     border: none !important;
@@ -1076,10 +1104,23 @@ img {
     cursor: pointer;
 }
 
-.like-button:hover{
-    background-color: #24A188;
+
+@media (min-width: 1250px) {
+    .like-button:hover {
     color: var(--background-primary-color);
+    border: 4px solid #24A188;
+    padding: 4px;
+    line-height: 36px;
+    }
+    .like-button.active:hover{
+    padding: 0;
+    line-height: 50px;
+
 }
+
+}
+
+
 
 .like-button.active{
     background-color: #0A4B3E;
@@ -1105,7 +1146,7 @@ img {
 @media (max-width: 1250px) {
     .messages-container {
         right: 12px;
-        bottom: none;
+        bottom: auto;
         top: 74px;
     }
 }
@@ -1190,4 +1231,40 @@ img {
     color: var(--theme-yellow-color);
     text-decoration: underline;
 
+}
+
+
+
+.quantity {
+    display: flex;
+}
+
+.quantity__button,
+.quantity__value {
+    height: 48px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #0A4B3E;
+    font-size: 24px;
+    background: none;
+    color: #fff;
+}
+
+.quantity__button {
+    width: 48px;
+
+    cursor: pointer;
+    padding: 0;
+}
+
+.quantity__value{
+    padding: 0 10px;
+}
+.quantity__value,
+.quantity__button + .quantity__button {
+    margin-left: -1px;
 }

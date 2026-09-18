@@ -1,0 +1,87 @@
+{% extends 'container.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+Прикольно
+{% endblock %}
+
+{% block description %}
+HELEN
+{% endblock %}
+
+{% block content %}
+<div class="container-1200">
+    <div class="breadcrumb">
+        <span class="breadcrumb__item">
+            <a href="{% url 'index' %}">Главная</a>
+        </span>
+        <span class="breadcrumb__item active">
+            Личный кабинет
+        </span>
+    </div>
+
+    <div class="h1">
+        Личный кабинет
+    </div>
+    <p>Добро пожаловать, <span class="user-name-span">Елена!</span></p>
+
+    <div class="user-container">
+        <div class="user-container-aside">
+            <div class="user-container-menu">
+                <div class="user-container-menu__user">
+                    <div class = "user-container-menu__user__avatar">
+                        <img src = "{% static 'woman.png'%}">
+                    </div>
+                    <div class = "user-container-menu__user__data">
+                        <p class = "user-name-span">Елена Ивановна</p>
+                        <p>elemaivanova@mail.ru</p>
+                        <p>+9 (999) 999-99-99</p>
+                    </div>
+                </div>
+                <div class="user-container-menu__item active">
+                    <div class="user-container-menu__item__icon">
+                        <img src="{% static 'shopping-bag.svg'%}">
+
+                    </div>
+                    <div class="user-container-menu__item__title">
+                        История заказов
+                    </div>
+                </div>
+                <div class="user-container-menu__item">
+                    <div class="user-container-menu__item__icon">
+                        <img src="{% static 'user3.svg'%}">
+
+                    </div>
+                    <div class="user-container-menu__item__title">
+                        Профиль/Данные
+                    </div>
+                </div>
+                <div class="user-container-menu__item">
+                    <div class="user-container-menu__item__icon">
+                        <img src="{% static 'heart2.svg'%}">
+
+                    </div>
+                    <div class="user-container-menu__item__title">
+                        Избранное
+                    </div>
+                </div>
+                <div class="user-container-menu__item">
+                    <div class="user-container-menu__item__icon">
+                        <img src="{% static 'log-out.svg'%}">
+
+                    </div>
+                    <div class="user-container-menu__item__title">
+                        Выход
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="user-container-main">
+
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

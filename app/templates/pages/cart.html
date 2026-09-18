@@ -13,14 +13,270 @@ HELEN
 <div class="container-1200">
     <div class="breadcrumb">
         <span class="breadcrumb__item">
-            Главная
-        </span>
-        <span class="breadcrumb__item">
-            Каталог
+            <a href = "{% url 'index' %}">Главная</a> 
         </span>
         <span class="breadcrumb__item active">
-            Костюм женский
+            Корзина
         </span>
     </div>
+
+    <div class="h1">
+        Корзина
+    </div>
+    <p>3 товара</p>
+
+    <div class="cart-container-desktop">
+        <div class="cart-headers-desktop">
+            <div class="cart-headers-left">
+                <div class="cart-header">
+                    Товар
+                </div>
+            </div>
+            <div class="cart-headers-right">
+                <div class="cart-header cart-header-title">
+                </div>
+                <div class="cart-header cart-header-size">
+                    Размер
+                </div>
+                <div class="cart-header cart-header-quantity">
+                    Количество
+                </div>
+                <div class="cart-header cart-header-price">
+                    Цена
+                </div>
+                <div class="cart-header cart-header-delete">
+                </div>
+
+            </div>
+
+        </div>
+        <div class="cart-rows-desktop">
+            <div class="cart-row">
+                <div class="cart-row-left">
+                    <div class="cart-row-photo">
+                        <div class="cart-row-photo__sign">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12L10 17L19 8" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+
+                        <img src="{% static 'item-image.jpg' %}">
+
+                    </div>
+                </div>
+                <div class="cart-row-right">
+                    <div class="cart-row-title">
+                        <div class="cart-row-title__title">
+                            Костюм-пиджак женский
+                        </div>
+                        <div class="cart-row-title__subtitle">
+                            <div>Зеленый </div>
+                            <div class="cart-row-title__subtitle__color" style="background: #fff;">
+                            </div>
+
+                            </span>
+                        </div>
+                    </div>
+                    <div class="cart-row-size">
+                        S (42)
+                    </div>
+                    <div class="cart-row-quantity">
+                        <div class="quantity">
+                            <button class="quantity__button">−</button>
+                            <span class="quantity__value">1</span>
+                            <button class="quantity__button">+</button>
+                        </div>
+                    </div>
+                    <div class="cart-row-price">
+                        13 000 Р
+                    </div>
+                    <div class="cart-row-delete">
+                        <button class="cart-x-button">
+                            <img src="{% static 'x.svg' %}">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-row">
+                <div class="cart-row-left">
+                    <div class="cart-row-photo">
+                        <div class="cart-row-photo__sign">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12L10 17L19 8" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+
+                        <img src="{% static 'item-image.jpg' %}">
+
+                    </div>
+                </div>
+                <div class="cart-row-right">
+                    <div class="cart-row-title">
+                        <div class="cart-row-title__title">
+                            Костюм-пиджак женский
+                        </div>
+                        <div class="cart-row-title__subtitle">
+                            <div>Зеленый </div>
+                            <div class="cart-row-title__subtitle__color" style="background: #fff;">
+                            </div>
+
+                            </span>
+                        </div>
+                    </div>
+                    <div class="cart-row-size">
+                        S (42)
+                    </div>
+                    <div class="cart-row-quantity">
+                        <div class="quantity">
+                            <button class="quantity__button">−</button>
+                            <span class="quantity__value">1</span>
+                            <button class="quantity__button">+</button>
+                        </div>
+                    </div>
+                    <div class="cart-row-price">
+                        13 000 Р
+                    </div>
+                    <div class="cart-row-delete">
+                        <button class="cart-x-button">
+                            <img src="{% static 'x.svg' %}">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-row">
+                <div class="cart-row-left">
+                    <div class="cart-row-photo">
+                        <div class="cart-row-photo__sign">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12L10 17L19 8" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+
+                        <img src="{% static 'item-image.jpg' %}">
+
+                    </div>
+                </div>
+                <div class="cart-row-right">
+                    <div class="cart-row-title">
+                        <div class="cart-row-title__title">
+                            Костюм-пиджак женский
+                        </div>
+                        <div class="cart-row-title__subtitle">
+                            <div>Зеленый </div>
+                            <div class="cart-row-title__subtitle__color" style="background: #fff;">
+                            </div>
+
+                            </span>
+                        </div>
+                    </div>
+                    <div class="cart-row-size">
+                        S (42)
+                    </div>
+                    <div class="cart-row-quantity">
+                        <div class="quantity">
+                            <button class="quantity__button">−</button>
+                            <span class="quantity__value">1</span>
+                            <button class="quantity__button">+</button>
+                        </div>
+                    </div>
+                    <div class="cart-row-price">
+                        13 000 Р
+                    </div>
+                    <div class="cart-row-delete">
+                        <button class="cart-x-button">
+                            <img src="{% static 'x.svg' %}">
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="cart-container-mobile">
+        <div class="cart-row-mobile">
+            <div class="cart-row-mobile-left">
+                <div class="cart-row-photo">
+                    <div class="cart-row-photo__sign">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12L10 17L19 8" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+
+                    <img src="{% static 'item-image.jpg' %}">
+
+                </div>
+
+            </div>
+            <div class="cart-row-mobile-right">
+                <div class="cart-row-mobile-title">
+                    Пиджак женский
+                </div>
+                <div class="cart-row-mobile-second">
+                    <div class="cart-row-title__subtitle">
+                        <div>Зеленый </div>
+                        <div class="cart-row-title__subtitle__color" style="background: #fff;">
+                        </div>
+
+                    </div>
+                    <div class="cart-row-title__subtitle">
+                        S (43)
+                    </div>
+                </div>
+                <div class="cart-row-mobile-price">
+                    13 400 Р
+                </div>
+                <div class="cart-row-mobile-buttons">
+                        <div class="quantity">
+                            <button class="quantity__button">−</button>
+                            <span class="quantity__value">1</span>
+                            <button class="quantity__button">+</button>
+                        </div>
+                        <button class="cart-x-button">
+                            <img src="{% static 'x.svg' %}">
+                        </button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cart-buttons">
+        <div class="cart-buttons__left">
+            <button class="button button--ghost button--decor-line">
+                <span class="button__icon button__icon--left"> <img src="{% static 'shopping-cart2.svg' %}" alt="">
+                </span>
+                <span class="button__text">
+                    Продолжить покупки
+                </span>
+                <span class="button__line button__line--right"></span>
+            </button>
+
+        </div>
+        <div class="cart-buttons__right">
+            <div class="cart-buttons__right__total">
+                <div class="cart-buttons__right__total__label">
+                    Итого:
+                </div>
+                <div class="cart-buttons__right__total__value">
+                    13 000 ₽
+                </div>
+
+            </div>
+            <button class="button button--primary button--decor-line ">
+                <span class="button__text">
+                    ОФОРМИТЬ ЗАКАЗ
+                </span>
+                <span class="button__line button__line--right"></span>
+            </button>
+
+        </div>
+    </div>
+
+
 </div>
 {% endblock %}

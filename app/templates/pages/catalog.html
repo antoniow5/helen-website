@@ -39,22 +39,27 @@ HELEN
 
                 <div class="choice__dropdown">
                     <div class="choice__body">
+                        <div class="checkbox-group">
+                            {% for size in sizes %}
+                            <label class="checkbox">
 
-                        <label class="choice__option">
-                            <input type="radio" name="delivery" checked>
-                            <span>Standard delivery</span>
-                        </label>
+                                <input type="checkbox">
 
-                        <label class="choice__option">
-                            <input type="radio" name="delivery">
-                            <span>Express delivery</span>
-                        </label>
+                                <span class="checkbox__mark">
 
-                        <label class="choice__option">
-                            <input type="radio" name="delivery">
-                            <span>Pickup</span>
-                        </label>
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M5 12L10 17L19 8" stroke="white" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
 
+                                </span>
+                                <span class="checkbox__text">
+                                    {{ size.name }} - {{ size.code }}
+                                </span>
+
+                            </label>
+                            {% endfor %}                   
+                        </div>
                     </div>
                 </div>
             </div>
@@ -66,25 +71,34 @@ HELEN
 
                 <div class="choice__dropdown">
                     <div class="choice__body">
+                        <div class="checkbox-group">
+                            {% for color in colors %}
+                            <label class="checkbox">
 
-                        <label class="choice__option">
-                            <input type="radio" name="delivery" checked>
-                            <span>Standard delivery</span>
-                        </label>
+                                <input type="checkbox">
 
-                        <label class="choice__option">
-                            <input type="radio" name="delivery">
-                            <span>Express delivery</span>
-                        </label>
+                                <span class="checkbox__mark">
 
-                        <label class="choice__option">
-                            <input type="radio" name="delivery">
-                            <span>Pickup</span>
-                        </label>
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M5 12L10 17L19 8" stroke="white" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
 
+                                </span>
+                                <span class = "checkbox__color" style = "background-color: {{ color.hex_code }};">
+
+                                </span>
+                                <span class="checkbox__text">
+                                    {{ color.name }}
+                                </span>
+
+                            </label>
+                            {% endfor %}                   
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="choice">
                 <button class="choice__button" type="button">
                     <span class="choice__title">Коллекция</span>

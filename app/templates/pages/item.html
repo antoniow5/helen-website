@@ -13,13 +13,13 @@ HELEN
 <div class="container-1200">
     <div class="breadcrumb">
         <span class="breadcrumb__item">
-            Главная
+            <a href = "{% url 'index' %}">Главная</a> 
         </span>
         <span class="breadcrumb__item">
-            Каталог
+           <a href = "{% url 'catalog' %}">Каталог</a> 
         </span>
         <span class="breadcrumb__item active">
-            Костюм женский
+            {{ product.name }}
         </span>
     </div>
     <div class="item">
@@ -30,7 +30,7 @@ HELEN
         </div>
         <div class="item-body">
             <div class="item-body__desktop_like">
-                <div class="like-button active">
+                <div class="like-button {% if is_favorited %} active {% endif %}" data-item-id="{{ product.id }}">
                     <img src="{% static 'heart-full.svg' %}">
                 </div>
             </div>
@@ -64,7 +64,7 @@ HELEN
                             </div>
                         </div>
                         <div class="item-body__mobile_like">
-                            <div class="like-button active">
+                            <div class="like-button {% if is_favorited %} active {% endif %}" data-item-id="{{ product.id }}">
                                 <img src="{% static 'heart-full.svg' %}">
                             </div>
                         </div>
@@ -76,7 +76,7 @@ HELEN
                                 Стоимость:
                             </span>
                             <span class="item-body__fields__value">
-                                {{ product.price }} ₽
+                                {{ product.price|floatformat:"0" }} ₽
                             </span>
                         </div>
 
@@ -405,7 +405,7 @@ function getSelectedVariant() {
                 </script>
                 <div class="item-body__button">
                     <button class="button button--primary button--decor-line"
-                    onclick="console.log(getSelectedVariant())">
+                    id = "add-to-cart">
 
                         <span class="button__line button__line--left"></span>
 
@@ -418,13 +418,65 @@ function getSelectedVariant() {
 
 
                     </button>
+                    <script>
+document.querySelector('#add-to-cart').addEventListener('click', async () => {
+    const variant = getSelectedVariant();
 
+    if (!variant) {
+        showMessage('Выберите вариант товара', 2000);
+        return;
+    }
+
+    try {
+        const response = await fetch(`/cart/add/${variant.id}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            showMessage(data.message, 2000);
+            return;
+        }
+
+        showMessage('Товар добавлен в корзину', 2000);
+
+        // If you have a cart counter:
+        const cartCount = document.querySelector('.cart-count');
+
+        if (cartCount) {
+            cartCount.textContent = data.cart_items_count;
+        }
+
+    } catch (error) {
+        console.error(error);
+        showMessage('Произошла ошибка', 2000);
+    }
+});
+                    </script>
                 </div>
                 <div class="item-body__accordions">
-                    <div class="accordion-container">
+                    <div class="accordion-container active" id = "description">
                         <div class="accordion">
                             <div class="accordion-title">
-                                Description
+                                Описание
+                            </div>
+                            <div class="accordion-button">
+                                -
+                            </div>
+                        </div>
+                        <div class="accordion-panel">
+                            {{ product.description }}
+                        </div>
+                    </div>
+                     <div class="accordion-container">
+                        <div class="accordion">
+                            <div class="accordion-title">
+                                Состав и уход
                             </div>
                             <div class="accordion-button">
                                 +
@@ -434,6 +486,20 @@ function getSelectedVariant() {
                             {{ product.description }}
                         </div>
                     </div>
+                    <div class="accordion-container">
+                        <div class="accordion">
+                            <div class="accordion-title">
+                                Доставка и возврат
+                            </div>
+                            <div class="accordion-button">
+                                +
+                            </div>
+                        </div>
+                        <div class="accordion-panel">
+                            {{ product.description }}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -651,18 +717,63 @@ function getSelectedVariant() {
                 button.textContent = button.textContent.trim() === '+' ? '-' : '+';
             });
         });
-        showMessage('Товар добавлен в корзину', 2000);
 
         document.querySelectorAll('.like-button').forEach(button => {
-            button.addEventListener('click', () => {
-                button.classList.toggle('active');
-                if (button.classList.contains('active')) {
-                    showMessage('Товар добавлен в избранное', 2000);
-                } else {
-                    showMessage('Товар удален из избранного', 2000);
+            button.addEventListener('click', async () => {
+                const itemId = button.dataset.itemId;
+
+                try {
+                    const response = await fetch(`/item/${itemId}/favorite/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': getCookie('csrftoken'),
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        showMessage(data.message, 2000);
+                        return;
+                    }
+
+                    if (data.message === 'created') {
+                        button.classList.add('active');
+                        showMessage('Товар добавлен в избранное', 2000);
+                    } else if (data.message === 'deleted') {
+                        button.classList.remove('active');
+                        showMessage('Товар удален из избранного', 2000);
+                    }
+
+                } catch (error) {
+                    console.error(error);
+                    showMessage('Произошла ошибка', 2000);
                 }
             });
         });
+
+
+        function getCookie(name) {
+            let cookieValue = null;
+
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+
+                for (let cookie of cookies) {
+                    cookie = cookie.trim();
+
+                    if (cookie.startsWith(name + '=')) {
+                        cookieValue = decodeURIComponent(
+                            cookie.substring(name.length + 1)
+                        );
+                        break;
+                    }
+                }
+            }
+
+            return cookieValue;
+        }
     </script>
 </div>
 {% endblock %}

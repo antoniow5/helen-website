@@ -39,11 +39,21 @@ urlpatterns = [
     path('item/<int:item_id>', views.item, name='item'),
     path('item/<int:item_id>/', views.item),
 
-    path('catalog', views.catalog),
+    path('item/<int:item_id>/favorite', views.item_favorite, name='item_favorite'),
+    path('item/<int:item_id>/favorite/', views.item_favorite),
+
+    path('catalog', views.catalog, name='catalog'),
     path('catalog/', views.catalog),
     
-    path('cart', views.catalog),
-    path('cart/', views.catalog),
+    path('cart', views.cart),
+    path('cart/', views.cart),
+
+    path('user', views.user_container),
+    path('user/', views.user_container),
+
+    
+    path('cart/add/<int:variant_id>', views.add_to_cart),
+    path('cart/add/<int:variant_id>/', views.add_to_cart),
 
     path('logout', logout),
 

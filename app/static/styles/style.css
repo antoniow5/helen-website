@@ -407,7 +407,7 @@ a {
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     background: #03221C;
-    box-shadow: 0px 0px 31px 0px #00000014;
+    box-shadow: 0px -10px 40px 0px rgba(0, 0, 0, .2);;
 }
 
 .bottom_menu_mobile__item {
@@ -567,7 +567,6 @@ a {
     background: var(--background-primary-color);
     border-radius: 24px 24px 0 0;
     padding: 20px 20px 35px;
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, .2);
     transform: translateY(100%);
     transition: transform .35s cubic-bezier(.22, 1, .36, 1);
     z-index: 1004;
@@ -624,6 +623,8 @@ a {
 
 .mobile_language.open {
     transform: translateY(0);
+        box-shadow: 0 -10px 40px rgba(0,0,0,.2);
+
 }
 
 .closed_club__title.kor {
@@ -640,7 +641,6 @@ a {
     background: var(--background-primary-color);
     border-radius: 24px 24px 0 0;
     padding: 20px 20px 35px;
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, .2);
     transform: translateY(100%);
     transition: transform .35s cubic-bezier(.22, 1, .36, 1);
     z-index: 1004;
@@ -648,6 +648,8 @@ a {
 
 .mobile_search.open {
     transform: translateY(0);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, .2);
+
 }
 
 .reviews {
@@ -728,6 +730,17 @@ a {
     flex-wrap: wrap;
 }
 
+@media (max-width: 1250px) {
+    .breadcrumb {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    }
+
+    p {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
 .similar {
     display: flex;
     flex-direction: column;
@@ -802,6 +815,19 @@ a {
     font-size: 15px;
     color: #0A4B3E;
     font-weight: 300;
+}
+.breadcrumb__item a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.breadcrumb__item a:visited{
+    text-decoration: none;
+    color: inherit;
+}
+
+.breadcrumb__item a:hover {
+    text-decoration: underline;
 }
 
 .breadcrumb__item::after {
@@ -1011,9 +1037,11 @@ a {
 
 .catalog-item__photo img {
     width: 100%;
-    height: 443px;
+    height: 387px;
     border-radius: 4px;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: #fff;
+
 }
 
 .catalog-item__mobile-button {
@@ -1067,7 +1095,6 @@ a {
     background: var(--background-primary-color);
     border-radius: 24px 24px 0 0;
     padding: 20px 20px 35px;
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, .2);
     transform: translateY(100%);
     transition: transform .35s cubic-bezier(.22, 1, .36, 1);
     z-index: 1004;
@@ -1075,10 +1102,14 @@ a {
 
 .mobile_sort.open {
     transform: translateY(0);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, .2);
+
 }
 
 .mobile_collections.open {
     transform: translateY(0);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, .2);
+
 }
 
 .mobile_size.open {
@@ -1087,6 +1118,8 @@ a {
 
 .mobile_color.open {
     transform: translateY(0);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, .2);
+
 }
 
 .index-image {
@@ -1165,7 +1198,8 @@ a {
 .item-body__choice_cards {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    gap: 20px;
+    /* flex-wrap: wrap; */
 }
 
 @media (max-width: 1250px) {
@@ -1238,10 +1272,17 @@ a {
         flex-direction: column;
         margin-top: 20px;
     }
-
+    .item-body__fields__field--price .item-body__fields__value {
+        font-size: 28px;
+    }
 }
 
 
+.item-body__accordions {
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+}
 .login-container {
     display: flex;
     width: 400px;
