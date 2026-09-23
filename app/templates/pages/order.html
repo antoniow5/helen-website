@@ -1,0 +1,111 @@
+{% extends 'container.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+Прикольно
+{% endblock %}
+
+{% block description %}
+HELEN
+{% endblock %}
+
+{% block content %}
+<div class="container-1200">
+    <div class="breadcrumb">
+        <span class="breadcrumb__item">
+            <a href="{% url 'index' %}">Главная</a>
+        </span>
+        <span class="breadcrumb__item active">
+            Оформление заказа
+        </span>
+    </div>
+
+    <div class="h1">
+        Оформление заказа
+    </div>
+
+    <div class="order-container">
+        <div class="order-container-aside">
+        </div>
+        <div class="order-container-main">
+            <h1 class="user-container-h1"> Данные покупателя</h1>
+            <form method="post">
+
+                <p class="user-data-p">Контактные данные</p>
+                <div class="user_data__form">
+
+
+
+                    <div class="input-row">
+
+                        <div class="input {% if error.email %} input--error {% endif %}">
+                            <label class="input__label" for="email">E-mail</label>
+                            <div class="input__wrapper">
+                                <input type="text" id="email" name="email" class="input__field"
+                                    placeholder="Введите e-mail" required>
+                                <button class="input__visibility">
+
+                                    <img src='{% static "pencil.svg" %}'>
+
+                                </button>
+
+
+                            </div>
+                            {% if error.email %}
+                            <span class="input__message">
+                                {{ error.email }}
+                            </span>
+                            {% endif %}
+                        </div>
+
+                        <div class="input {% if error.phone %} input--error {% endif %}">
+                            <label class="input__label" for="phone">Номер телефона</label>
+                            <div class="input__wrapper">
+                                <input type="text" id="phone" name="phone" class="input__field"
+                                    placeholder="+7 (ххх)-хх-хх" required>
+                                <button class="input__visibility">
+
+                                    <img src='{% static "pencil.svg" %}'>
+
+                                </button>
+
+                            </div>
+                            {% if error.phone %}
+                            <span class="input__message">
+                                {{ error.phone }}
+                            </span>
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+                                    <p class="user-data-p">Адрес доставки</p>
+
+                    <div class="input {% if error.address %} input--error {% endif %}">
+                        <label class="input__label" for="address">Адрес доставки</label>
+                        <div class="input__wrapper">
+                            <input type="text" id="address" name="address" class="input__field"
+                                placeholder="Введите адрес" required>
+                            <button class="input__visibility">
+
+                                <img src='{% static "pencil.svg" %}'>
+
+                            </button>
+
+                        </div>
+                        {% if error.address %}
+                        <span class="input__message">
+                            {{ error.address }}
+                        </span>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,193 @@
+{% extends 'pages/user_container.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+Прикольно
+{% endblock %}
+
+{% block description %}
+HELEN
+{% endblock %}
+
+{% block user_content %}
+<h1 class="user-container-h1"> Профиль/Данные</h1>
+<form method="post">
+
+    <p class="user-data-p">Контактные данные</p>
+    <div class="user_data__form">
+
+        <div class="input-row">
+
+            <div class="input {% if error.last_name %} input--error {% endif %}">
+                <label class="input__label" for="last_name">Имя</label>
+                <div class="input__wrapper">
+                    <input type="text" id="last_name" name="last_name" class="input__field" placeholder="Введите имя"
+                        required>
+                    <button class="input__visibility">
+
+                        <img src='{% static "pencil.svg" %}'>
+
+                    </button>
+
+
+                </div>
+                {% if error.last_name %}
+                <span class="input__message">
+                    {{ error.last_name }}
+                </span>
+                {% endif %}
+            </div>
+
+            <div class="input {% if error.last_name %} input--error {% endif %}">
+                <label class="input__label" for="first_name">Фамилия</label>
+                <div class="input__wrapper">
+                    <input type="text" id="first_name" name="first_name" class="input__field"
+                        placeholder="Введите фамилию" required>
+                    <button class="input__visibility">
+
+                        <img src='{% static "pencil.svg" %}'>
+
+                    </button>
+
+                </div>
+                {% if error.first_name %}
+                <span class="input__message">
+                    {{ error.first_name }}
+                </span>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <div class="input-row">
+
+            <div class="input {% if error.email %} input--error {% endif %}">
+                <label class="input__label" for="email">E-mail</label>
+                <div class="input__wrapper">
+                    <input type="text" id="email" name="email" class="input__field" placeholder="Введите e-mail"
+                        required>
+                    <button class="input__visibility">
+
+                        <img src='{% static "pencil.svg" %}'>
+
+                    </button>
+
+
+                </div>
+                {% if error.email %}
+                <span class="input__message">
+                    {{ error.email }}
+                </span>
+                {% endif %}
+            </div>
+
+            <div class="input {% if error.phone %} input--error {% endif %}">
+                <label class="input__label" for="phone">Номер телефона</label>
+                <div class="input__wrapper">
+                    <input type="text" id="phone" name="phone" class="input__field" placeholder="+7 (ххх)-хх-хх"
+                        required>
+                    <button class="input__visibility">
+
+                        <img src='{% static "pencil.svg" %}'>
+
+                    </button>
+
+                </div>
+                {% if error.phone %}
+                <span class="input__message">
+                    {{ error.phone }}
+                </span>
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="input {% if error.address %} input--error {% endif %}">
+            <label class="input__label" for="address">Адрес доставки</label>
+            <div class="input__wrapper">
+                <input type="text" id="address" name="address" class="input__field" placeholder="Введите адрес"
+                    required>
+                <button class="input__visibility">
+
+                    <img src='{% static "pencil.svg" %}'>
+
+                </button>
+
+            </div>
+            {% if error.address %}
+            <span class="input__message">
+                {{ error.address }}
+            </span>
+            {% endif %}
+        </div>
+
+    </div>
+</form>
+ <p class="user-data-p password" >Пароль</p>
+<div class = "user_data__password_form">
+        <div class="input input--password">
+
+        <label class="input__label">
+            Password
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="password" class="input__field" placeholder="Введите пароль">
+
+            <button class="input__visibility">
+
+                <img src="{% static 'eye.svg' %}">
+
+            </button>
+            
+
+
+        </div>
+
+    </div>
+    <div class="input input--password">
+
+        <label class="input__label">
+            Password
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="password" class="input__field" placeholder="Введите пароль">
+
+            <button class="input__visibility">
+
+                <img src="{% static 'eye.svg' %}">
+
+            </button>
+
+        </div>
+
+    </div>
+    <div class="input input--password input--action">
+
+        <label class="input__label">
+            Password
+        </label>
+
+        <div class="input__wrapper">
+
+            <input type="password" class="input__field" placeholder="Введите пароль">
+
+            <button class="input__visibility">
+
+                <img src="{% static 'eye.svg' %}">
+
+            </button>
+
+            <button class="input__button">
+                →
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    {% endblock %}

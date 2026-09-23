@@ -29,16 +29,17 @@ HELEN
         <div class="user-container-aside">
             <div class="user-container-menu">
                 <div class="user-container-menu__user">
-                    <div class = "user-container-menu__user__avatar">
-                        <img src = "{% static 'woman.png'%}">
+                    <div class="user-container-menu__user__avatar">
+                        <img src="{% static 'woman.png'%}">
                     </div>
-                    <div class = "user-container-menu__user__data">
-                        <p class = "user-name-span">Елена Ивановна</p>
+                    <div class="user-container-menu__user__data">
+                        <p class="user-name-span">Елена Ивановна</p>
                         <p>elemaivanova@mail.ru</p>
                         <p>+9 (999) 999-99-99</p>
                     </div>
                 </div>
-                <div class="user-container-menu__item active">
+                <a href="{% url 'user_orders' %}">
+                <div class="user-container-menu__item {% if user_orders_active %} active {% endif %}">
                     <div class="user-container-menu__item__icon">
                         <img src="{% static 'shopping-bag.svg'%}">
 
@@ -47,24 +48,32 @@ HELEN
                         История заказов
                     </div>
                 </div>
-                <div class="user-container-menu__item">
-                    <div class="user-container-menu__item__icon">
-                        <img src="{% static 'user3.svg'%}">
+                </a>
+                <a href="{% url 'user_data' %}">
+                    <div class="user-container-menu__item {% if user_data_active %} active {% endif %}">
+                        <div class="user-container-menu__item__icon">
+                            <img src="{% static 'user3.svg'%}">
 
+                        </div>
+                        <div class="user-container-menu__item__title">
+                            Профиль/Данные
+                        </div>
                     </div>
-                    <div class="user-container-menu__item__title">
-                        Профиль/Данные
-                    </div>
-                </div>
-                <div class="user-container-menu__item">
-                    <div class="user-container-menu__item__icon">
-                        <img src="{% static 'heart2.svg'%}">
+                </a>
 
+                <a href="{% url 'user_favorite' %}">
+                    <div class="user-container-menu__item {% if user_favorite_active %} active {% endif %}">
+                        <div class="user-container-menu__item__icon">
+                            <img src="{% static 'heart2.svg'%}">
+
+                        </div>
+                        <div class="user-container-menu__item__title">
+                            Избранное
+
+                        </div>
                     </div>
-                    <div class="user-container-menu__item__title">
-                        Избранное
-                    </div>
-                </div>
+                </a>
+
                 <div class="user-container-menu__item">
                     <div class="user-container-menu__item__icon">
                         <img src="{% static 'log-out.svg'%}">
@@ -78,7 +87,9 @@ HELEN
             </div>
         </div>
         <div class="user-container-main">
-
+            {% block user_content %}
+            <h1 class="user-container-h1"> user content</h1>
+            {% endblock %}
         </div>
     </div>
 

@@ -1,0 +1,62 @@
+:root {
+    --background-primary-color: #03221C;
+    --theme-yellow-color: #DFB748;
+    --backgroud-secondary-color: #082922;
+    --font-secondary: #0A4B3E;
+}
+
+
+.order-container{
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    margin-bottom: 120px;
+
+}
+
+.order-container-aside {
+    width: 488px;
+    background-color: var(--backgroud-secondary-color);
+    height: 983px;
+
+}
+
+.order-container-main {
+    flex: 1;
+    background-color: var(--backgroud-secondary-color);
+    min-height: 983px;
+    padding: 20px;
+
+}
+
+.order-container-menu {
+    background-color: var(--backgroud-secondary-color);
+    height: 392px;
+    display: flex;
+    border-radius: 4px;
+    flex-direction: column;
+}
+
+
+
+@media (max-width: 1250px) {
+    .order-container {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .order-container-aside {
+        width: 100vw;
+        margin-left: -32px;
+        margin-right: -32px;
+    }
+
+    .order-container-main {
+        width: 100vw;
+        margin-left: -32px;
+        margin-right: -32px;
+        min-height: 100px;
+        margin-top: 32px;
+    }
+}

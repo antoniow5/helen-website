@@ -3,7 +3,7 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseForbidden, HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
-
+from django.db.models import Prefetch
 from .models import Favorite, ProductVariant, Product, Cart, CartItem, Size, Color
 
 User = get_user_model()
@@ -33,28 +33,41 @@ def index(request):
     return render(request, "pages/index.html")
 
 
-def index2(request):
-    return render(request, "archive/index2.html")
-
 
 def catalog(request):
+    page = int(request.GET.get("page", 1))
 
     cart_items_count = get_cart_count(request)
 
     sizes = Size.objects.all().order_by('code')
     colors = Color.objects.all().order_by('hex_code')
 
+    products = Product.objects.filter(
+    variants__stock_quantity__gt=0
+    ).prefetch_related(
+        Prefetch(
+            "variants",
+            queryset=ProductVariant.objects.filter(stock_quantity__gt=0),
+            to_attr="available_variants",
+        )
+    ).distinct()
+
+
+    start = (page - 1) * 9
+    end = start + 9
+
+    products = products[start:end]
+    print(products)
+
     context = {
                 'cart_items_count': cart_items_count,
-
+                'products': products,
                 'sizes': sizes,
                 'colors': colors,
                }
     return render(request, 'pages/catalog.html', context)
 
 
-def item2(request):
-    return render(request, 'pages/item.html')
 
 
 def item(request, item_id):
@@ -80,15 +93,6 @@ def item(request, item_id):
         'is_favorited': is_favorited,
     }
 
-    # what to send
-    # Basics
-        # request user or session
-        # cart number of items
-    # Item 
-        # item itself
-        # item photos
-        # item variants
-        
     return render(request, "pages/item.html", context)
 
 
@@ -150,6 +154,7 @@ def add_to_cart(request, variant_id):
         'quantity': cart_item.quantity,
         'cart_items_count': cart.items.count()
     })
+
 
 
 def cart(request):
@@ -262,3 +267,18 @@ def register_user(request):
         login(request, user)
 
         return redirect('index')
+
+
+def user_data(request):
+    return render(request, 'pages/user_data.html', {'user_data_active' : True})
+
+
+def user_favorite(request):
+    return render(request, 'pages/user_favorite.html', {'user_favorite_active' : True})
+
+
+def user_orders(request):
+    return render(request, 'pages/user_orders.html', {'user_orders_active' : True})
+
+def create_order(request):
+    return render(request, 'pages/order.html')

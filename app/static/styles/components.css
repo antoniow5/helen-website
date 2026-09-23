@@ -53,8 +53,8 @@
 
 
 .button--secondary {
-
-    background: var(--background-primary-color);
+    background: none;
+    /* background: var(--background-primary-color); */
     color: var(--theme-yellow-color);
     border: 1px solid var(--theme-yellow-color)
 
@@ -63,7 +63,7 @@
 
 .button--secondary:hover {
 
-    background: #d9dfdd;
+    opacity: 0.8;
 
 }
 

@@ -28,7 +28,7 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
 
     path('', views.index, name='index'),
-    path('index2', views.index2, name='index2'),
+    # path('index2', views.index2, name='index2'),
 
     # path('login-page', views.login_page, name='login_page'),
     # path('login-page/', views.login_page, name='login_page'),
@@ -45,8 +45,8 @@ urlpatterns = [
     path('catalog', views.catalog, name='catalog'),
     path('catalog/', views.catalog),
     
-    path('cart', views.cart),
-    path('cart/', views.cart),
+    path('cart', views.cart, name='cart'),
+    path('cart/', views.cart, name='cart'),
 
     path('user', views.user_container),
     path('user/', views.user_container),
@@ -61,7 +61,24 @@ urlpatterns = [
     # path('register-page/', views.register_page, name="register_page"),
 
     path('register-user', views.register_user, name="register_user"),
-    path('register-user/', views.register_user, name="register_user")
+    path('register-user/', views.register_user, name="register_user"),
+
+
+    path('user-data', views.user_data, name="user_data"),
+    path('user-data/', views.user_data, name="user_data"),
+
+
+    path('user-favorite', views.user_favorite, name="user_favorite"),
+    path('user-favorite/', views.user_favorite, name="user_favorite"),
+
+
+    path('user-orders', views.user_orders, name="user_orders"),
+    path('user-orders/', views.user_orders, name="user_orders"),
+
+    path('create-order', views.create_order, name="create_order"),
+    path('create-order/', views.create_order, name="create_order"),
+
+
 
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

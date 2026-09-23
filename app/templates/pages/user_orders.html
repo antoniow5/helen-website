@@ -1,0 +1,90 @@
+{% extends 'pages/user_container.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+Прикольно
+{% endblock %}
+
+{% block description %}
+HELEN
+{% endblock %}
+
+{% block user_content %}
+<h1 class="user-container-h1">История заказов</h1>
+<div class="user-orders-container">
+    <div class="user-orders-headers">
+        <div class="user-orders-header user-orders-header-number">
+            № ЗАКАЗА
+        </div>
+        <div class="user-orders-header user-orders-header-date">
+            Дата
+        </div>
+        <div class="user-orders-header user-orders-header-status">
+            Статус
+        </div>
+        <div class="user-orders-header user-orders-header-button">
+        </div>
+
+    </div>
+    <div class="user-orders-rows">
+        <div class="user-orders-row">
+            <div class="user-orders-row__container">
+                <div class="user-orders-row__number">
+                    #31586
+                </div>
+                <div class="user-orders-row__date">
+                    24.05.2026
+                </div>
+                <div class="user-orders-row__status">
+                    <span class="delivery-status green"></span>
+                    Доставлено
+                </div>
+                <div class="user-orders-row__button">
+                    <button class="button button--secondary button--medium">
+                        Secondary Button
+                    </button>
+
+                </div>
+            </div>
+            <div class="user-orders-row__button-mobile">
+                <button class="button button--secondary button--medium">
+                    Secondary Button
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pagination-container margin-38px">
+    <div class="pagination">
+        <a href='#'>
+            <div class="pagionation-item active ">
+                01
+            </div>
+        </a>
+        <a href='#'>
+            <div class="pagionation-item ">
+                02
+            </div>
+        </a>
+        <a href='#'>
+
+            <div class="pagionation-item">
+                03
+            </div>
+
+        </a>
+        <a href='#'>
+
+            <div class="pagionation-item">
+                ...
+            </div>
+
+        </a>
+        <a href='#'>
+            <div class="pagionation-item ">
+                20
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

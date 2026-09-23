@@ -58,7 +58,7 @@ HELEN
                                 </span>
 
                             </label>
-                            {% endfor %}                   
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@ HELEN
                                     </svg>
 
                                 </span>
-                                <span class = "checkbox__color" style = "background-color: {{ color.hex_code }};">
+                                <span class="checkbox__color" style="background-color: {{ color.hex_code }};">
 
                                 </span>
                                 <span class="checkbox__text">
@@ -93,7 +93,7 @@ HELEN
                                 </span>
 
                             </label>
-                            {% endfor %}                   
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -244,93 +244,28 @@ HELEN
     </div>
 
     <div class="catalog-items">
+        {% for product in products %}
         <div class="catalog-item">
             <div class="catalog-item__photo">
-                <img src="{% static 'item-image.jpg' %}">
-            </div>
-            <div class="catalog-item__text">
-                <div class="catalog-item__title">
-                    Костюм-пиджак женский
-                </div>
-                <div class="catalog-item__price">
-                    13 499 ₽
-                </div>
-            </div>
-            <div class="catalog-item__mobile-button">
-                    <button class="button button--small button--ghost button--decor-line button--flex ">
-
-                        <span class="button__line button__line--left"></span>
-
-                        <span class="button__text">
-                            Добавить в корзину
-                        </span>
-                        <span class="button__icon button__icon--right"> <img width="24" height="24" src="{% static 'shopping-cart2.svg' %}"
-                                alt="">
-                        </span>
-
-
-                    </button>
-
-            </div>
-        </div>
-        <div class="catalog-item">
-            <div class="catalog-item__photo">
-                 <a href = "{% url 'item' item_id=1%}">
-                <img src="{% static 'item-image.jpg' %}">
+                <a href="{% url 'item' item_id=product.id%}">
+                    <img src="{% static 'item-image.jpg' %}">
                 </a>
             </div>
             <div class="catalog-item__text">
                 <div class="catalog-item__title">
-                    <a href = "{% url 'item' item_id=1%}">
-                    Костюм-пиджак женский
+                    <a href="{% url 'item' item_id=product.id%}">
+                        {{product.name}}
                     </a>
                 </div>
                 <div class="catalog-item__price">
-                    <a href = "{% url 'item' item_id=1%}">
-                    13 499 ₽
+                    <a href="{% url 'item' item_id=1%}">
+                        {{product.price|floatformat:"0"}} ₽
                     </a>
                 </div>
             </div>
         </div>
-        <div class="catalog-item">
-            <div class="catalog-item__photo">
-                <img src="{% static 'item-image.jpg' %}">
-            </div>
-            <div class="catalog-item__text">
-                <div class="catalog-item__title">
-                    Костюм-пиджак женский
-                </div>
-                <div class="catalog-item__price">
-                    13 499 ₽
-                </div>
-            </div>
-        </div>
-        <div class="catalog-item">
-            <div class="catalog-item__photo">
-                <img src="{% static 'item-image.jpg' %}">
-            </div>
-            <div class="catalog-item__text">
-                <div class="catalog-item__title">
-                    Костюм-пиджак женский
-                </div>
-                <div class="catalog-item__price">
-                    13 499 ₽
-                </div>
-            </div>
-        </div>
-        <div class="catalog-item">
-            <div class="catalog-item__photo">
-                <img src="{% static 'item-image.jpg' %}">
-            </div>
-            <div class="catalog-item__text">
-                <div class="catalog-item__title">
-                    Костюм-пиджак женский
-                </div>
-                <div class="catalog-item__price">
-                    13 499 ₽
-                </div>
-            </div>
-        </div>
+
+        {% endfor %}
     </div>
     <div class="pagination-container">
         <div class="pagination">
@@ -394,16 +329,16 @@ HELEN
         </div>
     </div>
 </div>
-<div class = "mobile_sort">
+<div class="mobile_sort">
 
 </div>
-<div class = "mobile_color">
+<div class="mobile_color">
 
 </div>
-<div class = "mobile_collections">
+<div class="mobile_collections">
 
 </div>
-<div class = "mobile_size">
+<div class="mobile_size">
 
 </div>
 {% endblock %}

@@ -63,7 +63,7 @@ function removeMessage(message) {
             </div>
 
             <div class="menu_desktop__center">
-                <a class="menu_desktop__link" href="/catalog">{% trans "Каталог" %}</a>
+                <a class="menu_desktop__link" href="{% url 'catalog'%}">{% trans "Каталог" %}</a>
                 <a class="menu_desktop__link" href="#">{% trans "Коллекции" %}</a>
                 <a class="menu_desktop__link" href="#">{% trans "О бренде" %}</a>
 
@@ -81,13 +81,13 @@ function removeMessage(message) {
                     </div>
 
                     <div class="menu_desktop__link" href="#">
-                        <a href="/catalog">
+                        <a href="{% url 'user_data' %}">
                             <img class="menu_desktop__icon" src="{% static 'user.svg'%}" width="24">
                         </a>
                     </div>
 
                     <div class="menu_desktop__link menu_desktop__cart" href="#">
-                        <a href="/cart">
+                        <a href="{% url 'cart' %}">
                             <img class="menu_desktop__icon" src="{% static 'shopping-cart.svg' %}" width="24">
                         </a>
                         <span class="menu_desktop__cart_badge">
@@ -151,7 +151,7 @@ function removeMessage(message) {
 
 </div>
 <div class="menu_mobile__drawer">
-    <a href="#">{% trans "Каталог" %}</a>
+    <a href="{% url 'catalog' %}">{% trans "Каталог" %}</a>
     <a href="#">{% trans "Коллекции" %}</a>
     <a href="#">{% trans "О бренде" %}</a>
     <div class="menu_desktop__language">
@@ -243,7 +243,7 @@ function removeMessage(message) {
 </div>
 <div class="bottom_menu_mobile">
     <nav class="bottom_menu_mobile__container">
-        <a href="/catalog" class="bottom_menu_mobile__item">
+        <a href="{% url 'catalog' %}" class="bottom_menu_mobile__item">
             <img src="{% static 'grid2.svg' %}" alt="">
             <span>{% trans "Каталог" %}</span>
         </a>
@@ -253,12 +253,12 @@ function removeMessage(message) {
             <span>{% trans "Поиск" %}</span>
         </a>
 
-        <a href="#" class="bottom_menu_mobile__item">
+        <a href="{% url 'user_data' %}" class="bottom_menu_mobile__item">
             <img src="{% static 'user2.svg' %}" alt="">
             <span>{% trans "Профиль" %}</span>
         </a>
 
-        <a href="#" class="bottom_menu_mobile__item">
+        <a href="{% url 'cart' %}" class="bottom_menu_mobile__item">
             <img src="{% static 'shopping-cart2.svg' %}" alt="">
             <span>{% trans "Корзина" %}</span>
         </a>
