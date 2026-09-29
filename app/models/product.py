@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
 class Product(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
     description = models.TextField(null=True, blank=True)
@@ -21,7 +22,6 @@ class Product(models.Model):
         super().save(*args, **kwargs)
         self.create_variant_if_no_variation()   
     
-
 
 class Color(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
@@ -80,57 +80,3 @@ class ProductVariant(models.Model):
         else:
             size = '-'
         return f"{self.product.name} - {color} - {size}"
-
-
-class Cart(models.Model):
-    session_id = models.CharField(max_length=100, unique=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, unique=True)
-
-
-class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
-    product_variant = models.ForeignKey(ProductVariant, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['cart', 'product_variant'], name='unique_cart_item')
-        ]
-
-
-    def __str__(self):
-        return f"{self.quantity} x {self.product_variant.product.name} ({self.product_variant.color.name}, {self.product_variant.size.name})"
-
-
-class Order(models.Model):    
-    # cart = models.OneToOneField(Cart, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=20, default='Pending')  # e.g., Pending, Shipped, Delivered
-
-
-    def __str__(self):
-        return f"Order {self.id} - {self.status}"
-
-
-class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
-    product_variant = models.ForeignKey(ProductVariant, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-
-    def __str__(self):
-        return f"{self.quantity} x {self.product_variant.product.name} ({self.product_variant.color.name}, {self.product_variant.size.name})"
-    
-
-class Favorite(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='favorited_by')
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['user', 'product'], name='unique_favorite')
-        ]
-
-    def __str__(self):
-        return f"{self.user.username} - {self.product.name}"

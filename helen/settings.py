@@ -9,26 +9,29 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wqg22gey12an&6gkd@(rmhzn(*f8+c=2s-av3zx#-lp6s!oqm-'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = os.getenv("DEBUG") == "True"
 
 
-# Application definition
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-        "django_extensions",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -46,7 +49,6 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     "app.middleware.LanguageMiddleware",
     'django.middleware.common.CommonMiddleware',
-    # "django.middleware.locale.LocaleMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -120,18 +122,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
 STATICFILES_DIRS = [
-    BASE_DIR / "static", 
+    BASE_DIR / "app/static", 
 ]
 
-ALLOWED_HOSTS = [
-    "192.168.1.85",
-    "localhost",
-    "127.0.0.1",
-]
-
-if DEBUG == True:
-    ALLOWED_HOSTS += '*'
 
 
 USE_I18N = True
